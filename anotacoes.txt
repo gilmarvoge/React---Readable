@@ -1,0 +1,23 @@
+<Route exact path="/:category?" render={props => <Categories {...props}/>} />
+
+
+
+Dessa forma, cada vez que o usuário clicar em uma categoria, ele vai conseguir realizar 
+a operação que realizou dentro do `componentDidMount`. Isso "resolveria o problema". 
+
+Entretanto, existe um problema nessa abordagem. O que ocorre é que, quando você usa `component` 
+(ao invés de `render`), o router usa o `React.createElement` para criar um novo elemento react 
+a partir do dado componente. Ou seja, se você prover uma função para a prop `component`,
+ você vai *criar um novo componente a cada render, ou seja, o component vai montar e desmontar 
+ao invés de somente atualizar o componente* (por isso que o `componentDidMount` será chamado toda vez :wink:). 
+Inclusive, é possível até perceber visualmente a cada clique do usuário em uma categoria.
+Por isso,
+ como é exibido no curso e na própria documentação 
+(https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md#component), 
+caso queria utilizar uma função para renderizar um componente, deve-se utilizar a prop `render` ao invés 
+de `component`:
+```<Route exact path="/:category?" render={props => <Categories {...props}/>} />```
+
+Nesse caso, o componente só será atualizado (e não montado e desmontado) e você pode utilizar outros
+ métodos do ciclo de vida (ao invés de somente o `componentDidMount`) para controlar o comportamento,
+ como o @Claudio Rocha falou mais acima :point_up_2: . (edited)
