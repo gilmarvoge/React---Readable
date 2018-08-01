@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 
 
-const comentarios = ({ comentarios }) => {
 
-           return (
+class ViewComments extends Component {
+    render() {
+        const comments = this.props.comments
+        return (
+            
             <div>
-                <ol className='comentario-lista'>
-                    {comentarios.map((coment) => (
+              
+                  <ol className='comentario-lista'>
+                    {comments.map((coment) => (
                         <li key={coment.id} className='comentario-lista-item'>
                             <div className='comentario-detalhe'>
-                            <p>{`Criado por ${coment.author} em ${new Date(coment.timestamp).toLocaleString('pt-BR', { hour12: false })}`}</p>
-                          
-                            <p>{coment.body}</p>
-                            <p>{coment.commentCount} Comentarios</p>
-                            <p>Votos: {coment.voteScore}</p>
+                                <p><strong>{`Author: ${coment.author}`}</strong></p>
+                                <p>{coment.body}</p>
+                                <p>Votos: {coment.voteScore}</p>
                             </div>
                             <button className="botao-vote-down"><i class="fa fa-thumbs-o-down"></i></button>
                             <button className="botao-vote-up"><i class="fa fa-thumbs-o-up"></i></button>
@@ -22,9 +24,10 @@ const comentarios = ({ comentarios }) => {
                         </li>
                     ))}
                 </ol>
+               
             </div>
         )
     }
+}
 
-
-export default comentarios
+export default ViewComments

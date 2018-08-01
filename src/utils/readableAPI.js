@@ -7,7 +7,7 @@ if (!token)
 
 const headers = {
   'Accept': 'application/json',
-  'Authorization': token
+  'Authorization': 'token'
 }
 
 export const getAllPosts = () =>
@@ -74,10 +74,12 @@ export const deletePost = (post) =>
     headers: headers
   }).then(res => res.json())
 
-export const getAllCommentsByPost = (postId) =>
-  fetch(`${api}/posts/${postId}/comments`, { headers })
+export const getAllCommentsByPost = ({id}) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
 
+
+    
 export const addComment = (comment, parentId) =>
   fetch(`${api}/comments`, {
     method: 'POST',

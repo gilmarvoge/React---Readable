@@ -167,7 +167,6 @@ li {
 }
 
 .post-button-editar{
-  
   background-color:#45a049;
   color:white;
   border: none;
@@ -177,7 +176,10 @@ li {
   float: left;
   height: 24px;
   font-size:12px;
-  
+}
+
+.post-button-editar:hover{
+  background-color: #239628;
 }
 
 .post-botao-novo-post[type=botao-novo-post] {
@@ -196,13 +198,28 @@ li {
 }
 
 
+.comment-botao-novo-comment[type=botao-novo-comment] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-size:12px;
+ 
+}
+
+.comment-botao-novo-comment[type=botao-novo-comment]:hover {
+  background-color: #239628;
+}
+
 .tamanho-a-botao{
   height: 20px;
 
 }
 
 .botao-vote-up{
-  font-size:16px;
+  font-size:14px;
   color:blue;
   cursor: pointer;
   background-color: white;
@@ -210,6 +227,7 @@ li {
   outline: 1.5px double #2196F3;
   cursor: pointer;
   height: 20px;
+
  align-self: flex-end;
   margin-right: -50px;
   
@@ -220,7 +238,7 @@ li {
 }
 
 .botao-vote-down{
-  font-size:16px;
+  font-size:14px;
   color:red;
   cursor: pointer;
   background-color: white;
@@ -248,6 +266,15 @@ li {
   margin-left: 20px;
 }
 
+.form-input-modal {
+  font: 1em sans-serif;
+  width: 530px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #999;
+  margin-left: 20px;
+}
+
 .form-new-post {
   
   margin: 0 auto;
@@ -265,6 +292,13 @@ li {
 .form-label{
   display: block;
   margin-top: 50px;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.form-label-modal{
+  display: block;
+  
   margin-left: 20px;
   text-align: left;
 }
@@ -388,6 +422,7 @@ background: white;
 }
 
 .comentario-lista {
+  margin-top: 30px;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -395,6 +430,7 @@ background: white;
 }
 
 .comentario-lista-item {
+  
   padding: 10px;
   display: flex;
 }

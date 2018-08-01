@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import FormComentario from './ViewDetalheComentario';
-import Comentarios from './Comentarios';
+import ViewComments from './ViewComments';
 import Posts from './Posts';
 import { connect } from 'react-redux';
-import { getPostById  } from '../actions/PostsActions'
-import { getComentsById  } from '../actions/ComentsActions'
+import { getPostById } from '../actions/PostsActions'
+import { getCommentsById } from '../actions/CommentsActions'
+import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
 
+let token = localStorage.token
+if (!token)
+    token = localStorage.token = Math.random.toString(36).substr(-8)
 
+const headers = {
+    'Accept': 'application/json',
+    'Authorization': 'token'
+}
 
 class ViewDetalhePostagens extends Component {
-   
 
     componentDidMount() {
         this.props.getPostById(this.props.match.params.postId);
-        this.props.getComentsById(this.props.match.params.postId)
+        this.props.getCommentsById(this.props.match.params.postId)
     }
 
-    
     render() {
-     
-       const post = this.props.post
-       const coments = this.props.coments
+
+        const post = this.props.post
 
         return (
             <div>
-            <ol className='post-list'>
-                <li  className='post-list-item'>
+                <ul className='post-list'>
+                    <li className='post-list-item'>
                         <div className='post-details'>
                             <a href={`/${post.category}/${post.id}`} >
                                 <p><strong>{post.title}</strong></p></a>
@@ -40,21 +45,22 @@ class ViewDetalhePostagens extends Component {
                         <a className="tamanho-a-botao" href={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i class="fa fa-edit"></i></button></a>
                         <button className='post-button-remover'> Remove</button>
                     </li>
-                   </ol>
-                   
-           </div>
-           
-                 
+                </ul>
+                <ViewModalCriarEditarComment/>
+                <ViewComments comments={this.props.comments} />
+             </div>
+
+
         )
     }
 }
 
 
 
-const mapStateToProps = ({ post, coments }) => ({
+const mapStateToProps = ({ post, comments }) => ({
     post,
-    coments,
+    comments,
 });
 
 
-export default connect(mapStateToProps, { getPostById, getComentsById })(ViewDetalhePostagens);
+export default connect(mapStateToProps, { getPostById, getCommentsById })(ViewDetalhePostagens);

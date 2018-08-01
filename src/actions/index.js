@@ -1,3 +1,3 @@
 
 export * from './PostActions';
-export * from './ComentsActions';
+export * from './CommentsActions';

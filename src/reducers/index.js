@@ -4,8 +4,8 @@ import postsReducer from './postsReducer'
 import posts from './postsReducer'
 import post from './postReducer'
 import categories from './categoriesReducer'
-import coments from './comentsReducer'
-import coment from './comentReducer'
+import comments from './commentsReducer'
+//import comment from './commentReducer'
 
 
 
@@ -16,8 +16,8 @@ const rootReducer = combineReducers({
     posts, 
     post,
     categories,
-    coments,
-    coment,
+    comments,
+   
   })
 
   export default rootReducer
