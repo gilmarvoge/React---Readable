@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
+const  editOrNew =''
+
 const Posts = ({ posts }) => {
+
 
     return (
         <div>

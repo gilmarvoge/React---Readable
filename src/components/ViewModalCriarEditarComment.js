@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { adicionaPost, getPostById, editPostById } from '../actions/PostsActions'
+import { adicionaComment } from '../actions/CommentsActions'
 
 class ViewModalCriarEditarComment extends Component {
     constructor(props) {
@@ -8,6 +8,7 @@ class ViewModalCriarEditarComment extends Component {
         this.state = {
             body: '',
             author: '',
+            edit: '',
         };
     }
     handleChange = (propertyName) => (event) => {
@@ -16,9 +17,28 @@ class ViewModalCriarEditarComment extends Component {
         });
     };
 
+    onSubmitEditComment = e => {
+        
+        if (this.state.edit) {
+           const { author, body } = this.state;
+           this.props.editCommentById({
+               id: this.props.comment.id,
+               author,
+               body,
+          });
+       } else {
+           const { author, body } = this.state;
+           this.props.adicionaComment({
+               parentId: this.props.post_id,      
+               author,
+               body,
+            });
+       }
+   }
 
     render() {
         const { body, author } = this.state;
+       
         return (
             <div>
                 <button type="botao-novo-comment" class="comment-botao-novo-comment" data-toggle="modal" data-target="#myModal">Novo Comment</button>
@@ -27,7 +47,6 @@ class ViewModalCriarEditarComment extends Component {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                               
                             </div>
                             <div class="modal-body">
                                 <div >
@@ -40,7 +59,7 @@ class ViewModalCriarEditarComment extends Component {
                                 <input className="form-input-modal" type="text" id="author" required placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')}></input>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Salvar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onClick={this.onSubmitEditComment}>Salvar</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
@@ -51,4 +70,10 @@ class ViewModalCriarEditarComment extends Component {
     }
 }
 
-export default ViewModalCriarEditarComment
+const mapStateToProps = ({ comment }) => ({
+    comment,
+});
+
+
+export default connect(mapStateToProps, { adicionaComment })(ViewModalCriarEditarComment);
+

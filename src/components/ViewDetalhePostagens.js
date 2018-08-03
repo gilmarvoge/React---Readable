@@ -26,7 +26,7 @@ class ViewDetalhePostagens extends Component {
     render() {
 
         const post = this.props.post
-
+       
         return (
             <div>
                 <ul className='post-list'>
@@ -40,13 +40,13 @@ class ViewDetalhePostagens extends Component {
                             <p>{post.commentCount} Comentarios</p>
                             <p>Votos: {post.voteScore}</p>
                         </div>
-                        <button className="botao-vote-down"><i class="fa fa-thumbs-o-down"></i></button>
-                        <button className="botao-vote-up"><i class="fa fa-thumbs-o-up"></i></button>
+                        <button className="botao-vote-down"><i className="fa fa-thumbs-o-down"></i></button>
+                        <button className="botao-vote-up"><i className="fa fa-thumbs-o-up"></i></button>
                         <a className="tamanho-a-botao" href={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i class="fa fa-edit"></i></button></a>
                         <button className='post-button-remover'> Remove</button>
                     </li>
                 </ul>
-                <ViewModalCriarEditarComment/>
+                <ViewModalCriarEditarComment post_id={post.id}/>
                 <ViewComments comments={this.props.comments} />
              </div>
 

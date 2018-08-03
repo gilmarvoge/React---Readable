@@ -17,7 +17,7 @@ body {
   padding: 20px;
   border: 1px solid #d5d8df;
   border-radius: 4px;
-  width: 728px;
+  width: 750px;
   height:flex; 
 }
 
@@ -25,8 +25,11 @@ body {
   font-size: 30px;
   font-weight: 300;
   margin:5px 0;
+  line-height: 50px;
+  color: #999;
   text-align: center;
-  background: #6d696d
+  background: #222222e0;
+  height:50px; 
 }
 .menu {
   display: flex;
@@ -70,32 +73,21 @@ li {
   float: left;
   font-size:12px;
 }
+.post-botao-selecionar-categoria:hover {
+  background-color: #45a049;
+}
+
 
 .post-botao-selecionar-categoria:focus {
   background-color:  royalblue;
   color: white;
   padding: 12px 20px;
   width: 80px;
-  
+  font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
   float: left;
   font-size:12px;
-}
-.post-botao-selecionar-categoria::before {
-  background-color:  royalblue;
-  color: white;
-  padding: 12px 20px;
-  width: 80px;
-  
-  border-radius: 4px;
-  cursor: pointer;
-  float: left;
-  font-size:12px;
-}
-
-.post-botao-selecionar-categoria::after {
-  background-color: royalblue;
 }
 
 .menu-navegacao{
@@ -111,6 +103,8 @@ li {
   margin: 0;
   padding: 0;
   list-style-type: none;
+  margin-top: 20px;
+  padding-top: 1px;
 }
 
 .post-list-item {
@@ -276,7 +270,7 @@ li {
 }
 
 .form-new-post {
-  
+  margin-left: 10px;
   margin: 0 auto;
   width: 700px;
   padding: 1em;
@@ -291,7 +285,7 @@ li {
 
 .form-label{
   display: block;
-  margin-top: 50px;
+  margin-top: 55px;
   margin-left: 20px;
   text-align: left;
 }
@@ -399,9 +393,9 @@ border-radius: 50%;
 background: white;
 }
 
-/*styles dos comentarios*/
+/*styles dos commentarios*/
 
-.form-novo-comentario {
+.form-novo-commentario {
   /* Just to center the form on the page */
   margin: 0 auto;
   
@@ -414,14 +408,14 @@ background: white;
 
 }
 
-.form-label-comentario{
+.form-label-commentario{
   display: block;
   margin-top: 20px;
   margin-left: 20px;
   text-align: left;
 }
 
-.comentario-lista {
+.commentario-lista {
   margin-top: 30px;
   width: 100%;
   margin: 0;
@@ -429,14 +423,14 @@ background: white;
   list-style-type: none;
 }
 
-.comentario-lista-item {
+.commentario-lista-item {
   
   padding: 10px;
   display: flex;
 }
 
 @media (min-width: 600px) {
-  .comentario-lista-item {
+  .commentario-lista-item {
     margin-top: 20px;
     background-color: aliceblue;
     border: 1px solid #CCC;
@@ -444,7 +438,7 @@ background: white;
   }
 }
 
-.comentario-detalhe {
+.commentario-detalhe {
   padding-left: 20px;
   flex: 1;
   overflow: hidden;
@@ -452,7 +446,7 @@ background: white;
   justify-content: center;
 }
 
-.comentario-detalhe p {
+.commentario-detalhe p {
   margin: 0;
   min-width: 0;
   white-space: nowrap;

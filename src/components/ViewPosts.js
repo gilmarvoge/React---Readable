@@ -11,20 +11,20 @@ class ViewPosts extends Component {
     }
 
     render() {
-    
+
         return (
             <div className='list-post-top'>
                 <div className="alinhar-botao-radio">
-                    <a href="/novo"><button class='post-botao-novo-post' type='botao-novo-post'>Novo Post</button></a>
+                    <a href="/novo"><button className='post-botao-novo-post' type='botao-novo-post'>Novo Post</button></a>
                     <div className='radio-button'>
-                        <label class="container-radio-button">Ordenar por:</label>
-                        <label class="container-radio-button">Data
+                        <label className="container-radio-button">Ordenar por:</label>
+                        <label className="container-radio-button">Data
                 <input type="radio" name="radio" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
-                        <label class="container-radio-button">Votos
+                        <label className="container-radio-button">Votos
                  <input type="radio" name="radio" />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                     </div>
                 </div>

@@ -80,7 +80,7 @@ export const getAllCommentsByPost = ({id}) =>
 
 
     
-export const addComment = (comment, parentId) =>
+export const addComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
@@ -91,7 +91,7 @@ export const addComment = (comment, parentId) =>
       ...comment,
       'timestamp': Date.now(),
       'id': idGenerate(),
-      'parentId': parentId
+      
     })
   }).then(res => res.json())
 

@@ -9,13 +9,13 @@ class ViewComments extends Component {
             
             <div>
               
-                  <ol className='comentario-lista'>
-                    {comments.map((coment) => (
-                        <li key={coment.id} className='comentario-lista-item'>
-                            <div className='comentario-detalhe'>
-                                <p><strong>{`Author: ${coment.author}`}</strong></p>
-                                <p>{coment.body}</p>
-                                <p>Votos: {coment.voteScore}</p>
+                  <ol className='commentario-lista'>
+                    {comments.map((comment) => (
+                        <li key={comment.id} className='commentario-lista-item'>
+                            <div className='commentario-detalhe'>
+                                <p><strong>{`Author: ${comment.author}`}</strong></p>
+                                <p>{comment.body}</p>
+                                <p>Votos: {comment.voteScore}</p>
                             </div>
                             <button className="botao-vote-down"><i class="fa fa-thumbs-o-down"></i></button>
                             <button className="botao-vote-up"><i class="fa fa-thumbs-o-up"></i></button>

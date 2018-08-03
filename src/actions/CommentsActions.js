@@ -15,9 +15,9 @@ export const getAllComments = () => ({
     
   })
 
-  export const adicionaComment = coment  => ({
+  export const adicionaComment = comment  => ({
       type: ADICIONA_COMMENT,
-      coment,
+      comment,
     })
 
     export const getCommentsById = id => ({
@@ -26,9 +26,9 @@ export const getAllComments = () => ({
     });
 
 
-    export const editCommentById = coment => ({
+    export const editCommentById = comment => ({
       type: EDIT_COMMENT_BY_ID,
-      coment,
+      comment,
     });
 
 

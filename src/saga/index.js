@@ -21,11 +21,14 @@ import {
   SET_CATEGORIES,
   EDIT_POST_BY_ID,
   EDIT_POST_BY_ID_SUCCESS
+  
 } from '../constantes/Post';
 
 import {
   GET_COMMENTS_BY_ID,
-  GET_COMMENTS_BY_ID_SUCCESS
+  GET_COMMENTS_BY_ID_SUCCESS,
+  ADICIONA_COMMENT,
+  ADICIONA_COMMENT_SUCCESS,
 
 } from '../constantes/Comment';
 
@@ -84,8 +87,27 @@ function* getCommentsById( postId ) {
 }
 
 
+function* adicionaPost(action) {
+  const adicionaPost = yield call(readableAPI.adicionaPost, action.post);
+  
+  yield put({
+    type: ADICIONA_POST_SUCCESS,
+    adicionaPost,
+  });
+}
 
-
+function* adicionaComment(action) {
+  const comment = yield call(readableAPI.addComment, action.comment);
+  const comments = yield call(readableAPI.getAllCommentsByPost, comment.parentId);  
+  yield put({
+    type: ADICIONA_COMMENT_SUCCESS,
+    comment,
+  });
+  yield put({
+    type: GET_COMMENTS_BY_ID_SUCCESS,
+   comments,
+      });
+}
 
 
 
@@ -96,6 +118,7 @@ export default function* rootSaga() {
   yield takeLatest(GET_POST_BY_ID, getPostById),
   yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
   yield takeLatest(GET_COMMENTS_BY_ID,  getCommentsById)
+  yield takeLatest(ADICIONA_COMMENT,  adicionaComment)
 
 
   // yield takeEvery(SET_POSTS, fetchAllPosts)

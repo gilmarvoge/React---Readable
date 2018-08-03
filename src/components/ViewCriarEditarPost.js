@@ -6,16 +6,27 @@ class ViewCriarEditarPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: 'react',
+            category: '',
             title: '',
             body: '',
             author: '',
+            edit: '',
         };
     }
 
     componentDidMount() {
-        this.props.getPostById(this.props.match.params.postId);
+        this.fetchPostById() //fetch to take a post Id if have one to edit
     }
+
+    fetchPostById() {
+        const edit = this.props.match.params.postId; //if have post id, then have post to edit
+        this.setState({edit})
+        
+        if (edit) {
+            this.props.getPostById(this.props.match.params.postId);
+        }
+    }
+
 
     componentWillReceiveProps(nextProps) {
         const { category, title, body, author } = nextProps.post;
@@ -24,28 +35,22 @@ class ViewCriarEditarPost extends Component {
             title,
             body,
             author,
-
         });
     }
 
-    onSubmitEditNewPost = e => {
-        e.preventDefault();
-        const { category, title, author, body } = this.state;
-        this.props.editPostById({
-            id: this.props.post.id,
-            category,
-            author,
-            title,
-            body,
-            author,
-        });
 
-    }
-
-    onSubmitNewPost = e => {
-        const isNew = this.props.match.params;
-
-  
+    onSubmitEditPost = e => {
+         if (this.state.edit) {
+            const { category, title, author, body } = this.state;
+            this.props.editPostById({
+                id: this.props.post.id,
+                category,
+                author,
+                title,
+                body,
+            
+            });
+        } else {
             const { category, title, author, body } = this.state;
             this.props.adicionaPost({
                 category,
@@ -54,7 +59,7 @@ class ViewCriarEditarPost extends Component {
                 body,
                 author,
             });
-        
+        }
     }
 
     handleChange = (propertyName) => (event) => {
@@ -63,34 +68,41 @@ class ViewCriarEditarPost extends Component {
         });
     };
 
+    handleChangeCategory = (category) => (event) => {
+        this.setState({
+            category
+        });
+    };
+
 
     render() {
         const { category, title, body, author } = this.state;
-
-       
+        console.log(`nova categoria ${category}`)
         return (
-            <form onSubmit={this.onSubmitNewPost} className="form-new-post">
-                <button className='post-botao-selecionar-categoria' name="botao" >React</button>
-                <button className='post-botao-selecionar-categoria' name="botao">Redux</button>
-                <button className='post-botao-selecionar-categoria' name="botao">Udacity</button>
-                <div>
-                    <label className='form-label'>Título</label>
-                </div>
-                <input className='form-input' type="text" id="title" required placeholder="Digite o Título" value={title} onChange={this.handleChange('title')}></input>
-                <div >
-                    <label className='form-label'>Conteúdo</label>
-                </div>
-                <textarea className="form-textarea" type="text" id="body" required placeholder="Digite o Conteúdo" value={body} onChange={this.handleChange('body')}></textarea>
+            <div className="form-new-post">
+                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('react')}>React</button>
+                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('redux')}>Redux</button>
+                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('udacity')}>Udacity</button>
+                <form onSubmit={this.onSubmitEditPost} >
+                    <div>
+                        <label className='form-label'>Título</label>
+                    </div>
+                    <input className='form-input' type="text" id="title" placeholder="Digite o Título" value={title} onChange={this.handleChange('title')}></input>
+                    <div >
+                        <label className='form-label'>Conteúdo</label>
+                    </div>
+                    <textarea className="form-textarea" type="text" id="body" placeholder="Digite o Conteúdo" value={body} onChange={this.handleChange('body')}></textarea>
 
-                <div >
-                    <label className='form-label'>Autor</label>
-                </div>
-                <input className="form-input" type="text" id="author" required placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')}></input>
+                    <div >
+                        <label className='form-label'>Autor</label>
+                    </div>
+                    <input className="form-input" type="text" id="author" placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')}></input>
 
-                <div>
-                    <button className="form-botao-submit" type="submit">Submit</button>
-                </div>
-            </form >
+                    <div>
+                        <button className="form-botao-submit" type="submit">Submit</button>
+                    </div>
+                </form >
+            </div>
         )
     }
 }
