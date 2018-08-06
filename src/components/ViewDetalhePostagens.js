@@ -1,32 +1,48 @@
 import React, { Component } from 'react';
-import FormComentario from './ViewDetalheComentario';
 import ViewComments from './ViewComments';
-import Posts from './Posts';
+import Comments from './Comments';
 import { connect } from 'react-redux';
 import { getPostById } from '../actions/PostsActions'
 import { getCommentsById } from '../actions/CommentsActions'
-import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
-
-let token = localStorage.token
-if (!token)
-    token = localStorage.token = Math.random.toString(36).substr(-8)
-
-const headers = {
-    'Accept': 'application/json',
-    'Authorization': 'token'
-}
+import { adicionaComment } from '../actions/CommentsActions'
+import ViewModalCriarEditarComment from './ViewModalCriarComment'
 
 class ViewDetalhePostagens extends Component {
 
     componentDidMount() {
+        this.props.getCommentsById(this.props.match.params.postId);
         this.props.getPostById(this.props.match.params.postId);
-        this.props.getCommentsById(this.props.match.params.postId)
     }
+
+    addCommentHandler = comment => {
+        comment.parentId = this.props.match.params.postId;
+        this.props.adicionaComment(comment);
+      };
+
+      /**  
+       
+        e.preventDefault();
+        if (this.state.edit) {
+           const { author, body } = this.state;
+           this.props.editCommentById({
+               id: this.props.comment.id,
+               author,
+               body,
+          });
+       } else {
+           const { author, body } = this.state;
+           this.props.adicionaComment({
+               parentId: this.props.post_id,      
+               author,
+               body,
+            });
+        } */
+
 
     render() {
 
         const post = this.props.post
-       
+        
         return (
             <div>
                 <ul className='post-list'>
@@ -46,9 +62,11 @@ class ViewDetalhePostagens extends Component {
                         <button className='post-button-remover'> Remove</button>
                     </li>
                 </ul>
-                <ViewModalCriarEditarComment post_id={post.id}/>
-                <ViewComments comments={this.props.comments} />
-             </div>
+                <ViewModalCriarEditarComment addComment={this.addCommentHandler}/>
+                <Comments comments={this.props.comments}/>
+                
+               
+            </div>
 
 
         )
@@ -56,11 +74,11 @@ class ViewDetalhePostagens extends Component {
 }
 
 
-
-const mapStateToProps = ({ post, comments }) => ({
+const mapStateToProps = ({ post, comments}) => ({
     post,
     comments,
+  
 });
 
 
-export default connect(mapStateToProps, { getPostById, getCommentsById })(ViewDetalhePostagens);
+export default connect(mapStateToProps,  {getPostById, getCommentsById, adicionaComment } )(ViewDetalhePostagens);

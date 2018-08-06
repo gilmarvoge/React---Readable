@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { adicionaComment } from '../actions/CommentsActions'
+
 
 class ViewModalCriarEditarComment extends Component {
     constructor(props) {
@@ -11,6 +11,7 @@ class ViewModalCriarEditarComment extends Component {
             edit: '',
         };
     }
+
     handleChange = (propertyName) => (event) => {
         this.setState({
             [propertyName]: event.target.value
@@ -18,22 +19,13 @@ class ViewModalCriarEditarComment extends Component {
     };
 
     onSubmitEditComment = e => {
-        
-        if (this.state.edit) {
-           const { author, body } = this.state;
-           this.props.editCommentById({
-               id: this.props.comment.id,
-               author,
-               body,
-          });
-       } else {
-           const { author, body } = this.state;
-           this.props.adicionaComment({
-               parentId: this.props.post_id,      
-               author,
-               body,
-            });
-       }
+        e.preventDefault();
+    const comment = {
+      body: this.state.comment,
+      author: this.state.author,
+    };
+    this.props.addComment(comment);
+       
    }
 
     render() {
@@ -75,5 +67,5 @@ const mapStateToProps = ({ comment }) => ({
 });
 
 
-export default connect(mapStateToProps, { adicionaComment })(ViewModalCriarEditarComment);
+export default connect(mapStateToProps)(ViewModalCriarEditarComment);
 

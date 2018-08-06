@@ -33,6 +33,13 @@ import {
 } from '../constantes/Comment';
 
 
+function* fetchAllCategories() {
+  const categories = yield call(readableAPI.getAllCategories)
+  yield put({
+    type: SET_CATEGORIES,
+    categories,
+  });
+}
 
 function* fetchAllPosts() {
   const posts = yield call(readableAPI.getAllPosts)
@@ -43,20 +50,11 @@ function* fetchAllPosts() {
 }
 
 function* adicionaPost(action) {
-  const { post } = action
-  const adicionaPost = yield call(readableAPI.adicionaPost, post);
+  const post = yield call(readableAPI.adicionaPost, action.post);
+  
   yield put({
     type: ADICIONA_POST_SUCCESS,
-    adicionaPost,
-  });
-}
-
-
-function* fetchAllCategories() {
-  const categories = yield call(readableAPI.getAllCategories)
-  yield put({
-    type: SET_CATEGORIES,
-    categories,
+    post,
   });
 }
 
@@ -86,18 +84,9 @@ function* getCommentsById( postId ) {
       });
 }
 
-
-function* adicionaPost(action) {
-  const adicionaPost = yield call(readableAPI.adicionaPost, action.post);
-  
-  yield put({
-    type: ADICIONA_POST_SUCCESS,
-    adicionaPost,
-  });
-}
-
 function* adicionaComment(action) {
   const comment = yield call(readableAPI.addComment, action.comment);
+  console.log(`parten pai pra atualizar lista ${comment.parentId}`)
   const comments = yield call(readableAPI.getAllCommentsByPost, comment.parentId);  
   yield put({
     type: ADICIONA_COMMENT_SUCCESS,

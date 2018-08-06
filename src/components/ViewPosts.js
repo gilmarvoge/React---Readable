@@ -7,7 +7,6 @@ class ViewPosts extends Component {
 
     componentDidMount() {
         this.props.getAllPosts()
-
     }
 
     render() {
