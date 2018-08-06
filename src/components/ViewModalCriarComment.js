@@ -19,9 +19,9 @@ class ViewModalCriarEditarComment extends Component {
     };
 
     onSubmitEditComment = e => {
-        e.preventDefault();
+       
     const comment = {
-      body: this.state.comment,
+      body: this.state.body,
       author: this.state.author,
     };
     this.props.addComment(comment);
