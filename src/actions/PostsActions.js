@@ -3,7 +3,9 @@ import {
   ADICIONA_POST,
   GET_POST_BY_ID,
   EDIT_POST_BY_ID,
-  SET_POSTS,
+  GET_ALL_POSTS_SUCCESS,
+  UPVOTE_POST,
+  DOWNVOTE_POST,
  
 } from '../constantes/Post';
 
@@ -29,9 +31,21 @@ export const getAllPosts = () => ({
       post,
     });
   
+    export const upVotePost = id => ({
+      type: UPVOTE_POST,
+      id,
+      option: 'upVote',
+    });
+    
+    export const downVotePost = id => ({
+      type: DOWNVOTE_POST,
+      id,
+      option: 'downVote',
+    });
+
  /* 
  export const setPosts = (posts) => ({
-    type: SET_POSTS,
+    type: GET_ALL_POSTS_SUCCESS,
     posts
   
   })

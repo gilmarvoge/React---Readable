@@ -56,17 +56,17 @@ export const getAllPostsByCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
     .then(res => res.json())
 
-export const voteOnPost = (post, vote) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const voteUpDownPost = (id, option) =>
+  fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ 'option': vote })
+    body: JSON.stringify({ option })
   }).then(res => res.json())
 
-
+  
 
 export const deletePost = (post) =>
   fetch(`${api}/posts/${post.id}`, {
@@ -74,12 +74,12 @@ export const deletePost = (post) =>
     headers: headers
   }).then(res => res.json())
 
-export const getAllCommentsByPost = ({id}) =>
+export const getAllCommentsByPost = ({ id }) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
 
 
-    
+
 export const addComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
@@ -91,7 +91,7 @@ export const addComment = (comment) =>
       ...comment,
       'timestamp': Date.now(),
       'id': idGenerate(),
-      
+
     })
   }).then(res => res.json())
 
@@ -99,18 +99,17 @@ export const getCommentById = (comment) =>
   fetch(`${api}/comments/${comment.id}`)
     .then(res => res.json())
 
-/*
-* Vote options: upVote or downVote
-*/
-export const voteOnComment = (comment, vote) =>
-  fetch(`${api}/comments/${comment.id}`, {
+
+export const voteUpDownComment = (id, option) =>
+  fetch(`${api}/comments/${id}`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ option: vote })
+    body: JSON.stringify({ option })
   }).then(res => res.json())
+
 
 export const updateComment = (comment) =>
   fetch(`${api}/comments/${comment.id}`, {

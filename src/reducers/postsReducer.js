@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 import {
-  SET_POSTS,
+  GET_ALL_POSTS_SUCCESS,
   ADICIONA_POST_SUCCESS,
   EDIT_POST_BY_ID_SUCCESS,
 } from '../constantes/Post'
@@ -10,7 +10,7 @@ import {
 
 const posts = (state = [], action) => {
   switch (action.type) {
-    case SET_POSTS: {
+    case GET_ALL_POSTS_SUCCESS: {
       return action.posts
     }
     case ADICIONA_POST_SUCCESS: {

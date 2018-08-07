@@ -19,7 +19,7 @@ class ViewModalCriarEditarComment extends Component {
     };
 
     onSubmitEditComment = e => {
-       
+    e.preventDefault();    
     const comment = {
       body: this.state.body,
       author: this.state.author,
@@ -33,14 +33,14 @@ class ViewModalCriarEditarComment extends Component {
        
         return (
             <div>
-                <button type="botao-novo-comment" class="comment-botao-novo-comment" data-toggle="modal" data-target="#myModal">Novo Comment</button>
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="botao-novo-comment" className="comment-botao-novo-comment" data-toggle="modal" data-target="#myModal">Novo Comment</button>
+                <div id="myModal" className="modal fade" role="dialog">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <div >
                                     <label className='form-label-modal'>Comment</label>
                                 </div>
@@ -50,9 +50,9 @@ class ViewModalCriarEditarComment extends Component {
                                 </div>
                                 <input className="form-input-modal" type="text" id="author" required placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')}></input>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal" onClick={this.onSubmitEditComment}>Salvar</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.onSubmitEditComment}>Salvar</button>
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Fechar</button>
                             </div>
                         </div>
                     </div>

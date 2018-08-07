@@ -13,10 +13,10 @@ import comments from './commentsReducer'
 
 
 const rootReducer = combineReducers({
-    posts, 
-    post,
-    categories,
-    comments,
+  categories,  
+  posts, 
+  comments,
+  post,
    
   })
 

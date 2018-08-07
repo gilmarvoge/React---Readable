@@ -10,7 +10,7 @@ class ViewPosts extends Component {
     }
 
     render() {
-
+        const posts = this.props.posts
         return (
             <div className='list-post-top'>
                 <div className="alinhar-botao-radio">
@@ -27,7 +27,9 @@ class ViewPosts extends Component {
                         </label>
                     </div>
                 </div>
-                <Posts posts={this.props.posts} />
+                {posts.map((post) => (
+                <Posts key={post.id} post={post} />
+                  ))}
             </div>
         )
     }

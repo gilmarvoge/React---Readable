@@ -59,6 +59,7 @@ class ViewCriarEditarPost extends Component {
                 body,
                 author,
             });
+            this.props.history.push("/");
         }
     }
 

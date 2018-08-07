@@ -11,24 +11,30 @@ import * as readableAPI from '../utils/readableAPI'
 
 import {
   GET_ALL_POSTS,
-  SET_POSTS,
+  GET_ALL_POSTS_SUCCESS,
   ADICIONA_POST,
   ADICIONA_POST_SUCCESS,
   GET_POST_BY_ID,
   GET_POST_BY_ID_SUCCESS,
-  GET_ALL_POSTS_SUCCESS,
+  UPVOTE_POST,
+  UPVOTE_POST_SUCCESS,
+  DOWNVOTE_POST,
+  DOWNVOTE_POST_SUCCESS,
   GET_ALL_CATEGORIES,
   SET_CATEGORIES,
   EDIT_POST_BY_ID,
   EDIT_POST_BY_ID_SUCCESS
-  
+
 } from '../constantes/Post';
 
 import {
   GET_COMMENTS_BY_ID,
   GET_COMMENTS_BY_ID_SUCCESS,
   ADICIONA_COMMENT,
-  ADICIONA_COMMENT_SUCCESS,
+  UPVOTE_COMMENT,
+  UPVOTE_COMMENT_SUCCESS,
+  DOWNVOTE_COMMENT,
+  DOWNVOTE_COMMENT_SUCCESS,
 
 } from '../constantes/Comment';
 
@@ -44,14 +50,13 @@ function* fetchAllCategories() {
 function* fetchAllPosts() {
   const posts = yield call(readableAPI.getAllPosts)
   yield put({
-    type: SET_POSTS,
+    type: GET_ALL_POSTS_SUCCESS,
     posts,
   });
 }
 
 function* adicionaPost(action) {
   const post = yield call(readableAPI.adicionaPost, action.post);
-  
   yield put({
     type: ADICIONA_POST_SUCCESS,
     post,
@@ -75,43 +80,79 @@ function* updatePost(action) {
   });
 }
 
-function* getCommentsById( postId ) {
+function* voteUpPost({ id, option }) {
+  const post = yield call(readableAPI.voteUpDownPost, id, option);
+  yield put({
+    type: UPVOTE_POST_SUCCESS,
+    post,
+  });
+}
 
+function* downVotePost({ id, option }) {
+  const post = yield call(readableAPI.voteUpDownPost, id, option);
+  yield put({
+    type: DOWNVOTE_POST_SUCCESS,
+    post,
+  });
+}
+
+
+function* getCommentsById(postId) {
   const comments = yield call(readableAPI.getAllCommentsByPost, postId)
   yield put({
     type: GET_COMMENTS_BY_ID_SUCCESS,
-   comments,
-      });
+    comments,
+  });
 }
 
 function* adicionaComment(action) {
   const comment = yield call(readableAPI.addComment, action.comment);
-  console.log(`parten pai pra atualizar lista ${comment.parentId}`)
-  const comments = yield call(readableAPI.getAllCommentsByPost, comment.parentId);  
+  const comments = yield call(readableAPI.getAllCommentsByPost, comment.parentId);
   yield put({
-    type: ADICIONA_COMMENT_SUCCESS,
-    comment,
+    type: GET_POST_BY_ID,
+    id: comment.parentId,
   });
   yield put({
     type: GET_COMMENTS_BY_ID_SUCCESS,
-   comments,
-      });
+    comments,
+  });
+}
+
+function* upVoteComment({ id, option }) {
+  const comment = yield call(readableAPI.voteUpDownComment, id, option);
+  yield put({
+    type: UPVOTE_COMMENT_SUCCESS,
+    comment,
+  });
+}
+
+function* downVoteComment({ id, option }) {
+  const comment = yield call(readableAPI.voteUpDownComment, id, option);
+  yield put({
+    type: DOWNVOTE_COMMENT_SUCCESS,
+    comment,
+  });
 }
 
 
 
 export default function* rootSaga() {
   yield takeEvery(GET_ALL_POSTS, fetchAllPosts)
-  yield takeLatest(ADICIONA_POST, adicionaPost),
-  yield takeLatest(EDIT_POST_BY_ID, updatePost),
-  yield takeLatest(GET_POST_BY_ID, getPostById),
-  yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
-  yield takeLatest(GET_COMMENTS_BY_ID,  getCommentsById)
-  yield takeLatest(ADICIONA_COMMENT,  adicionaComment)
+  yield takeEvery(ADICIONA_POST, adicionaPost),
+    yield takeEvery(EDIT_POST_BY_ID, updatePost),
+    yield takeEvery(GET_POST_BY_ID, getPostById),
+    yield takeEvery(UPVOTE_POST, voteUpPost),
+    yield takeEvery(DOWNVOTE_POST, downVotePost),
+    yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
+    yield takeEvery(GET_COMMENTS_BY_ID, getCommentsById),
+    yield takeEvery(ADICIONA_COMMENT, adicionaComment),
+    yield takeEvery(UPVOTE_COMMENT, upVoteComment),
+    yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
+  }
 
 
-  // yield takeEvery(SET_POSTS, fetchAllPosts)
-}
+ // yield takeEvery(GET_ALL_POSTS_SUCCESS, fetchAllPosts)
+
 
 
 
