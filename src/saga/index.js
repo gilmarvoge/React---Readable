@@ -107,7 +107,7 @@ function* getCommentsById(postId) {
 
 function* adicionaComment(action) {
   const comment = yield call(readableAPI.addComment, action.comment);
-  const comments = yield call(readableAPI.getAllCommentsByPost, comment.parentId);
+  const comments = yield call(readableAPI.getAllCommentsByPost, {id:comment.parentId});
   yield put({
     type: GET_POST_BY_ID,
     id: comment.parentId,
@@ -145,7 +145,7 @@ export default function* rootSaga() {
     yield takeEvery(DOWNVOTE_POST, downVotePost),
     yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
     yield takeEvery(GET_COMMENTS_BY_ID, getCommentsById),
-    yield takeEvery(ADICIONA_COMMENT, adicionaComment),
+    yield takeLatest(ADICIONA_COMMENT, adicionaComment),
     yield takeEvery(UPVOTE_COMMENT, upVoteComment),
     yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
   }
