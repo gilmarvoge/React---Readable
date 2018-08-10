@@ -25,7 +25,10 @@ class ViewModalCriarEditarComment extends Component {
       author: this.state.author,
     };
     this.props.addComment(comment);
-       
+    this.setState({
+        body: '',
+        author: '',
+    });     
    }
 
     render() {
@@ -65,7 +68,6 @@ class ViewModalCriarEditarComment extends Component {
 const mapStateToProps = ({ comment }) => ({
     comment,
 });
-
 
 export default connect(mapStateToProps)(ViewModalCriarEditarComment);
 

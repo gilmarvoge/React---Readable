@@ -63,8 +63,9 @@ function* adicionaPost(action) {
   });
 }
 
-function* getPostById({ id }) {
-  const post = yield call(readableAPI.getPostById, id);
+function* getPostById({ id }) { //entre chaves pega a ID e não o objeto
+  console.log("idddd"+id)
+    const post = yield call(readableAPI.getPostById, id);
   yield put({
     type: GET_POST_BY_ID_SUCCESS,
     post,
@@ -80,15 +81,19 @@ function* updatePost(action) {
   });
 }
 
-function* voteUpPost({ id, option }) {
+function* voteUpPost({ id, option} ) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({
     type: UPVOTE_POST_SUCCESS,
     post,
   });
+  yield put({
+    type: GET_POST_BY_ID_SUCCESS,
+    post,
+  });
 }
 
-function* downVotePost({ id, option }) {
+function* downVotePost ({id, option }) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({
     type: DOWNVOTE_POST_SUCCESS,
@@ -118,7 +123,7 @@ function* adicionaComment(action) {
   });
 }
 
-function* upVoteComment({ id, option }) {
+function* upVoteComment( id, option ) {
   const comment = yield call(readableAPI.voteUpDownComment, id, option);
   yield put({
     type: UPVOTE_COMMENT_SUCCESS,
@@ -126,7 +131,7 @@ function* upVoteComment({ id, option }) {
   });
 }
 
-function* downVoteComment({ id, option }) {
+function* downVoteComment( id, option ) {
   const comment = yield call(readableAPI.voteUpDownComment, id, option);
   yield put({
     type: DOWNVOTE_COMMENT_SUCCESS,
@@ -145,7 +150,7 @@ export default function* rootSaga() {
     yield takeEvery(DOWNVOTE_POST, downVotePost),
     yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
     yield takeEvery(GET_COMMENTS_BY_ID, getCommentsById),
-    yield takeLatest(ADICIONA_COMMENT, adicionaComment),
+    yield takeEvery(ADICIONA_COMMENT, adicionaComment),
     yield takeEvery(UPVOTE_COMMENT, upVoteComment),
     yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
   }

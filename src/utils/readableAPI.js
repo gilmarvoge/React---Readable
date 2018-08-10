@@ -74,7 +74,7 @@ export const deletePost = (post) =>
     headers: headers
   }).then(res => res.json())
 
-export const getAllCommentsByPost = ({ id }) =>
+export const getAllCommentsByPost = ( {id }) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
 

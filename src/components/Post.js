@@ -4,7 +4,7 @@ import {  upVotePost, downVotePost } from '../actions/PostsActions';
 
 const  editOrNew =''
 
-class Posts extends Component {
+class Post extends Component {
 
     upVotePost (id) {
         this.props.upVotePost(id);
@@ -43,4 +43,4 @@ render(){
     )
 }
 }
-export default connect(null, { upVotePost, downVotePost })( Posts);
+export default connect(null, { upVotePost, downVotePost })( Post);

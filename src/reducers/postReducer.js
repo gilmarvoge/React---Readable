@@ -13,7 +13,7 @@ const post = (state = [], action) => {
     case UPVOTE_POST_SUCCESS:
     case DOWNVOTE_POST_SUCCESS:
     case GET_POST_BY_ID_SUCCESS:  {
-      return { ...action.post };
+      return action.post;
     }
     default:
       return state;

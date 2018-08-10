@@ -27,7 +27,7 @@ class Comments extends Component {
                             </div>
                             <button className="botao-vote-down" onClick={() => this.downVoteComment(comment.id)}><i className="fa fa-thumbs-o-down"></i></button>
                             <button className="botao-vote-up" onClick={() => this.upVoteComment(comment.id)}><i className="fa fa-thumbs-o-up"></i></button>
-                            <a className="tamanho-a-botao" href="/editar"><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></a>
+                            <a className="tamanho-a-botao" href={`/${comment.id}`}><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></a>
                             <button className='post-button-remover'> Remove</button>
                         </li>
                   

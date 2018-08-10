@@ -6,10 +6,11 @@ import { getPostById } from '../actions/PostsActions'
 import { getCommentsById } from '../actions/CommentsActions'
 import { adicionaComment } from '../actions/CommentsActions'
 import ViewModalCriarEditarComment from './ViewModalCriarComment'
-import Posts from '../components/Posts'
+import Post from '../components/Post'
 
 class ViewDetalhePostagens extends Component {
-
+  
+    
     componentDidMount() {
         this.props.getPostById(this.props.match.params.postId);
         this.props.getCommentsById(this.props.match.params.postId);
@@ -47,7 +48,7 @@ class ViewDetalhePostagens extends Component {
         const comments = this.props.comments
         return (
             <div>
-                <Posts post={post} />
+                <Post post={post} />
                 <ViewModalCriarEditarComment addComment={this.addCommentHandler} />
                 {comments.map((comment) => (
                     <Comments key={comment.id} comment={comment}/>

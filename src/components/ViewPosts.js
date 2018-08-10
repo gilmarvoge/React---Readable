@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import Posts from './Posts';
+import Post from './Post';
 import { getAllPosts } from '../actions/PostsActions'
 import { connect } from 'react-redux'
+import { PostsSorted } from '../utils/helpers';
 
 class ViewPosts extends Component {
+    state = {
+        checkbox: 'date',
+    };
+
+    handleChange = event => {
+        this.setState({ checkbox: event.target.value });
+    };
+
 
     componentDidMount() {
         this.props.getAllPosts()
@@ -11,6 +20,8 @@ class ViewPosts extends Component {
 
     render() {
         const posts = this.props.posts
+        const checkbox = this.state.checkbox
+        console.log(`checkbox: ${this.state.checkbox}`)
         return (
             <div className='list-post-top'>
                 <div className="alinhar-botao-radio">
@@ -18,34 +29,36 @@ class ViewPosts extends Component {
                     <div className='radio-button'>
                         <label className="container-radio-button">Ordenar por:</label>
                         <label className="container-radio-button">Data
-                <input type="radio" name="radio" />
+                                <input
+                                type="radio"
+                                name="radio"
+                                value={'date'}
+                                onChange={this.handleChange}
+                            />
                             <span className="checkmark"></span>
                         </label>
-                        <label className="container-radio-button">Votos
-                 <input type="radio" name="radio" />
+                        <label className="container-radio-button" >Votos
+                             <input
+                                type="radio"
+                                name="radio"
+                                value={'score'}
+                                onChange={this.handleChange}
+                            />
                             <span className="checkmark"></span>
                         </label>
                     </div>
                 </div>
-                {posts.map((post) => (
-                <Posts key={post.id} post={post} />
-                  ))}
+                {PostsSorted(posts, checkbox).map((post) => (
+                    <Post key={post.id} post={post} />
+                ))}
             </div>
         )
     }
 }
-function mapDispatchToProps(dispatch) {
-    return {
-        getAllPosts: () => dispatch(getAllPosts())
-    }
-}
 
-function mapStateToProps(state) {
-    return {
-        posts: state.posts,
-    }
-}
+const mapStateToProps = ({ posts }) => ({
+    posts
+});
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(ViewPosts)
+export default connect(mapStateToProps, { getAllPosts })(ViewPosts)
 
