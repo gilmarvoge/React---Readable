@@ -20,13 +20,12 @@ class ViewCriarEditarPost extends Component {
 
     fetchPostById() {
         const edit = this.props.match.params.postId; //if have post id, then have post to edit
-        this.setState({edit})
-        
+        this.setState({ edit })
+
         if (edit) {
             this.props.getPostById(this.props.match.params.postId);
         }
     }
-
 
     componentWillReceiveProps(nextProps) {
         const { category, title, body, author } = nextProps.post;
@@ -38,9 +37,8 @@ class ViewCriarEditarPost extends Component {
         });
     }
 
-
     onSubmitEditPost = e => {
-         if (this.state.edit) {
+        if (this.state.edit) {
             const { category, title, author, body } = this.state;
             this.props.editPostById({
                 id: this.props.post.id,
@@ -48,8 +46,8 @@ class ViewCriarEditarPost extends Component {
                 author,
                 title,
                 body,
-            
             });
+            this.props.history.push("/");
         } else {
             const { category, title, author, body } = this.state;
             this.props.adicionaPost({

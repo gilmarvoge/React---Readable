@@ -1,15 +1,14 @@
-import { GET_ALL_CATEGORIES, SET_CATEGORIES } from "../constantes/Post";
+import { GET_ALL_CATEGORIES_SUCCESS } from "../constantes/Category";
 
-const categories = (state = {}, action) => {
-    switch (action.type) {
-      case SET_CATEGORIES: {
-        return action.categories
-      }
-      default:
-        return state;
+const categories = (state = [], action) => {
+  switch (action.type) {
+    case GET_ALL_CATEGORIES_SUCCESS: {
+      return action.categories
     }
+    default:
+      return state;
   }
-  
+}
 
 export default categories
 

@@ -20,8 +20,6 @@ import {
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST,
   DOWNVOTE_POST_SUCCESS,
-  GET_ALL_CATEGORIES,
-  SET_CATEGORIES,
   EDIT_POST_BY_ID,
   EDIT_POST_BY_ID_SUCCESS
 
@@ -39,15 +37,25 @@ import {
 } from '../constantes/Comment';
 
 
-function* fetchAllCategories() {
+import {
+  GET_ALL_CATEGORIES,
+  GET_ALL_CATEGORIES_SUCCESS,
+  GET_POSTS_BY_CATEGORY,
+  GET_POSTS_BY_CATEGORY_SUCCESS
+} from '../constantes/Category';
+
+
+
+
+function* getAllCategories() {
   const categories = yield call(readableAPI.getAllCategories)
   yield put({
-    type: SET_CATEGORIES,
+    type: GET_ALL_CATEGORIES_SUCCESS,
     categories,
   });
 }
 
-function* fetchAllPosts() {
+function* getAllPosts() {
   const posts = yield call(readableAPI.getAllPosts)
   yield put({
     type: GET_ALL_POSTS_SUCCESS,
@@ -69,6 +77,15 @@ function* getPostById({ id }) { //entre chaves pega a ID e não o objeto
   yield put({
     type: GET_POST_BY_ID_SUCCESS,
     post,
+  });
+}
+
+function* getPostsByCategory(action) {
+  const { category } = action
+  const posts = yield call(readableAPI.getPostsByCategory, category)
+  yield put({
+    type: GET_ALL_POSTS_SUCCESS,
+    posts,
   });
 }
 
@@ -142,18 +159,19 @@ function* downVoteComment( id, option ) {
 
 
 export default function* rootSaga() {
-  yield takeEvery(GET_ALL_POSTS, fetchAllPosts)
+  yield takeEvery(GET_ALL_POSTS, getAllPosts)
   yield takeEvery(ADICIONA_POST, adicionaPost),
     yield takeEvery(EDIT_POST_BY_ID, updatePost),
     yield takeEvery(GET_POST_BY_ID, getPostById),
+    yield takeEvery(GET_POSTS_BY_CATEGORY, getPostsByCategory),
     yield takeEvery(UPVOTE_POST, voteUpPost),
     yield takeEvery(DOWNVOTE_POST, downVotePost),
-    yield takeEvery(GET_ALL_CATEGORIES, fetchAllCategories),
+    yield takeEvery(GET_ALL_CATEGORIES, getAllCategories),
     yield takeEvery(GET_COMMENTS_BY_ID, getCommentsById),
     yield takeEvery(ADICIONA_COMMENT, adicionaComment),
     yield takeEvery(UPVOTE_COMMENT, upVoteComment),
     yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
-  }
+ }
 
 
  // yield takeEvery(GET_ALL_POSTS_SUCCESS, fetchAllPosts)

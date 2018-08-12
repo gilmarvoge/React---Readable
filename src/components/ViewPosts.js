@@ -1,22 +1,40 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import { getAllPosts } from '../actions/PostsActions'
+import { getPostsByCategory } from '../actions/CategoriesActions'
+
 import { connect } from 'react-redux'
 import { PostsSorted } from '../utils/helpers';
+
 
 class ViewPosts extends Component {
     state = {
         checkbox: 'date',
     };
 
+    componentDidMount() {
+        this.fetchPosts()
+    }
+    componentDidUpdate(prevPros, prevState) {
+        const prevUrl = prevPros.match.url
+        const { url } = this.props.match
+        if (url !== prevUrl) {
+            this.fetchPosts()
+        }
+    }
+
+    fetchPosts() {
+        const { url } = this.props.match
+        if (url === "/") {
+            this.props.getAllPosts()
+        } else {
+            this.props.getPostsByCategory(this.props.match.params.category)
+        }
+    }
+
     handleChange = event => {
         this.setState({ checkbox: event.target.value });
     };
-
-
-    componentDidMount() {
-        this.props.getAllPosts()
-    }
 
     render() {
         const posts = this.props.posts
@@ -57,8 +75,8 @@ class ViewPosts extends Component {
 }
 
 const mapStateToProps = ({ posts }) => ({
-    posts
+    posts,
 });
 
-export default connect(mapStateToProps, { getAllPosts })(ViewPosts)
+export default connect(mapStateToProps, { getAllPosts, getPostsByCategory })(ViewPosts)
 
