@@ -6,7 +6,7 @@ class ViewCriarEditarPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: '',
+            category: 'react',
             title: '',
             body: '',
             author: '',
@@ -79,23 +79,25 @@ class ViewCriarEditarPost extends Component {
         console.log(`nova categoria ${category}`)
         return (
             <div className="form-new-post">
-                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('react')}>React</button>
-                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('redux')}>Redux</button>
-                <button className='post-botao-selecionar-categoria' onClick={this.handleChangeCategory('udacity')}>Udacity</button>
+                <div required>
+                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('react')} required>React</button>
+                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('redux')}>Redux</button>
+                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('udacity')}>Udacity</button>
+               </div>   
                 <form onSubmit={this.onSubmitEditPost} >
                     <div>
                         <label className='form-label'>Título</label>
                     </div>
-                    <input className='form-input' type="text" id="title" placeholder="Digite o Título" value={title} onChange={this.handleChange('title')}></input>
+                    <input className='form-input' type="text" id="title" placeholder="Digite o Título" value={title} onChange={this.handleChange('title')} required></input>
                     <div >
                         <label className='form-label'>Conteúdo</label>
                     </div>
-                    <textarea className="form-textarea" type="text" id="body" placeholder="Digite o Conteúdo" value={body} onChange={this.handleChange('body')}></textarea>
+                    <textarea className="form-textarea" type="text" id="body" placeholder="Digite o Conteúdo" value={body} onChange={this.handleChange('body')} required></textarea>
 
                     <div >
                         <label className='form-label'>Autor</label>
                     </div>
-                    <input className="form-input" type="text" id="author" placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')}></input>
+                    <input className="form-input" type="text" id="author" placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')} required></input>
 
                     <div>
                         <button className="form-botao-submit" type="submit">Submit</button>

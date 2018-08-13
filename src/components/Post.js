@@ -18,8 +18,6 @@ render(){
     const post=this.props.post;
 
     return (
-
-
         <div>
             <ol className='post-list'>
                   <li className='post-list-item'>

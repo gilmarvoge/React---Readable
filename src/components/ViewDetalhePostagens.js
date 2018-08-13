@@ -5,12 +5,22 @@ import { connect } from 'react-redux';
 import { getPostById } from '../actions/PostsActions'
 import { getCommentsById } from '../actions/CommentsActions'
 import { adicionaComment } from '../actions/CommentsActions'
-import ViewModalCriarEditarComment from './ViewModalCriarComment'
+import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
 import Post from '../components/Post'
 
 class ViewDetalhePostagens extends Component {
-  
-    
+    constructor(props) {
+        super(props);
+
+        this.state = { isOpen: false };
+    }
+
+    toggleModal = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
     componentDidMount() {
         this.props.getPostById(this.props.match.params.postId);
         this.props.getCommentsById(this.props.match.params.postId);
@@ -43,15 +53,24 @@ class ViewDetalhePostagens extends Component {
 
 
     render() {
+        this.props.children
 
         const post = this.props.post
         const comments = this.props.comments
         return (
             <div>
                 <Post post={post} />
-                <ViewModalCriarEditarComment addComment={this.addCommentHandler} />
+                <button onClick={this.toggleModal} type="botao-novo-comment" className="comment-botao-novo-comment" >
+                    Novo Comentário
+                </button>
+                <ViewModalCriarEditarComment show={this.state.isOpen}
+                    onClose={this.toggleModal}
+                    addComment={this.addCommentHandler}
+                />
+
+
                 {comments.map((comment) => (
-                    <Comments key={comment.id} comment={comment}/>
+                    <Comments key={comment.id} comment={comment} />
                 ))}
             </div>
 
