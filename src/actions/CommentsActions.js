@@ -4,6 +4,7 @@ import {
   ADICIONA_COMMENT,
   GET_COMMENTS_BY_ID,
   EDIT_COMMENT_BY_ID,
+  DELETE_COMMENT,
   UPVOTE_COMMENT,
   DOWNVOTE_COMMENT
  
@@ -27,9 +28,13 @@ export const getAllComments = () => ({
       id,
     });
 
-
-    export const editCommentById = comment => ({
+    export const editComment = comment => ({
       type: EDIT_COMMENT_BY_ID,
+      comment,
+    });
+
+    export const deleteComment = comment => ({
+      type: DELETE_COMMENT,
       comment,
     });
 

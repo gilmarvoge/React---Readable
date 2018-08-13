@@ -3,7 +3,7 @@ import {
   ADICIONA_POST,
   GET_POST_BY_ID,
   EDIT_POST_BY_ID,
-  GET_ALL_POSTS_SUCCESS,
+  DELETE_POST,
   UPVOTE_POST,
   DOWNVOTE_POST,
  
@@ -28,6 +28,11 @@ export const getAllPosts = () => ({
 
     export const editPostById = post => ({
       type: EDIT_POST_BY_ID,
+      post,
+    });
+
+    export const deletePost = post => ({
+      type: DELETE_POST,
       post,
     });
   

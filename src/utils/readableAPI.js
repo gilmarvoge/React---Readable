@@ -65,9 +65,7 @@ export const voteUpDownPost = (id, option) =>
     },
     body: JSON.stringify({ option })
   }).then(res => res.json())
-
   
-
 export const deletePost = (post) =>
   fetch(`${api}/posts/${post.id}`, {
     method: 'DELETE',
@@ -77,8 +75,6 @@ export const deletePost = (post) =>
 export const getAllCommentsByPost = ( {id }) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
-
-
 
 export const addComment = (comment) =>
   fetch(`${api}/comments`, {

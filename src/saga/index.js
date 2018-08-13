@@ -21,7 +21,9 @@ import {
   DOWNVOTE_POST,
   DOWNVOTE_POST_SUCCESS,
   EDIT_POST_BY_ID,
-  EDIT_POST_BY_ID_SUCCESS
+  EDIT_POST_BY_ID_SUCCESS,
+  DELETE_POST,
+  DELETE_POST_SUCCESS
 
 } from '../constantes/Post';
 
@@ -29,6 +31,10 @@ import {
   GET_COMMENTS_BY_ID,
   GET_COMMENTS_BY_ID_SUCCESS,
   ADICIONA_COMMENT,
+  EDIT_COMMENT_BY_ID,
+  EDIT_COMMENT_BY_ID_SUCCESS,
+  DELETE_COMMENT,
+  DELETE_COMMENT_SUCCESS,
   UPVOTE_COMMENT,
   UPVOTE_COMMENT_SUCCESS,
   DOWNVOTE_COMMENT,
@@ -98,6 +104,14 @@ function* updatePost(action) {
   });
 }
 
+function* deletePost(action) {
+  const post = yield call(readableAPI.deletePost, action.post)
+  yield put({
+    type: DELETE_POST_SUCCESS,
+    post,
+  });
+}
+
 function* voteUpPost({ id, option} ) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({
@@ -117,7 +131,6 @@ function* downVotePost ({id, option }) {
     post,
   });
 }
-
 
 function* getCommentsById(postId) {
   const comments = yield call(readableAPI.getAllCommentsByPost, postId)
@@ -140,7 +153,24 @@ function* adicionaComment(action) {
   });
 }
 
-function* upVoteComment( id, option ) {
+function* updateComment(action) {
+   const comment = yield call(readableAPI.updateComment, action.comment)
+  yield put({
+    type: EDIT_COMMENT_BY_ID_SUCCESS,
+    comment,
+  });
+}
+
+function* deleteComment(action) {
+  const comment = yield call(readableAPI.deleteComment, action.comment)
+  yield put({
+    type: DELETE_COMMENT_SUCCESS,
+    comment,
+  });
+}
+
+
+function* upVoteComment({ id, option }) {
   const comment = yield call(readableAPI.voteUpDownComment, id, option);
   yield put({
     type: UPVOTE_COMMENT_SUCCESS,
@@ -148,7 +178,7 @@ function* upVoteComment( id, option ) {
   });
 }
 
-function* downVoteComment( id, option ) {
+function* downVoteComment({ id, option }) {
   const comment = yield call(readableAPI.voteUpDownComment, id, option);
   yield put({
     type: DOWNVOTE_COMMENT_SUCCESS,
@@ -157,20 +187,23 @@ function* downVoteComment( id, option ) {
 }
 
 
-
 export default function* rootSaga() {
   yield takeEvery(GET_ALL_POSTS, getAllPosts)
   yield takeEvery(ADICIONA_POST, adicionaPost),
+  yield takeEvery(UPVOTE_POST, voteUpPost),
+  yield takeEvery(DOWNVOTE_POST, downVotePost),
     yield takeEvery(EDIT_POST_BY_ID, updatePost),
+    yield takeEvery(DELETE_POST, deletePost),
     yield takeEvery(GET_POST_BY_ID, getPostById),
     yield takeEvery(GET_POSTS_BY_CATEGORY, getPostsByCategory),
-    yield takeEvery(UPVOTE_POST, voteUpPost),
-    yield takeEvery(DOWNVOTE_POST, downVotePost),
     yield takeEvery(GET_ALL_CATEGORIES, getAllCategories),
     yield takeEvery(GET_COMMENTS_BY_ID, getCommentsById),
     yield takeEvery(ADICIONA_COMMENT, adicionaComment),
     yield takeEvery(UPVOTE_COMMENT, upVoteComment),
     yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
+    yield takeEvery(EDIT_COMMENT_BY_ID, updateComment),
+    yield takeEvery(DELETE_COMMENT, deleteComment)
+    
  }
 
 
