@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  upVotePost, downVotePost } from '../actions/PostsActions';
+import {  upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
 
 const  editOrNew =''
 
@@ -12,6 +12,9 @@ class Post extends Component {
     downVotePost = (id) => {
        this.props.downVotePost(id);
       };
+      deletePost = (id) => {
+        this.props.deletePost(id);
+       };
 
 render(){
 
@@ -33,7 +36,7 @@ render(){
                         <button className="botao-vote-down"  onClick={() => this.downVotePost(post.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVotePost(post.id)}><i className="fa fa-thumbs-o-up"></i></button>
                         <a className="tamanho-a-botao" href={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></a>
-                        <button className='post-button-remover'> Remove</button>
+                        <button className='post-button-remover'onClick={() => this.deletePost(post.id)}> Remove</button>
                     </li>
               
             </ol>
@@ -41,4 +44,4 @@ render(){
     )
 }
 }
-export default connect(null, { upVotePost, downVotePost })( Post);
+export default connect(null, { upVotePost, downVotePost, deletePost })( Post);

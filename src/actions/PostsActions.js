@@ -31,9 +31,9 @@ export const getAllPosts = () => ({
       post,
     });
 
-    export const deletePost = post => ({
+    export const deletePost = id => ({
       type: DELETE_POST,
-      post,
+      id,
     });
   
     export const upVotePost = id => ({

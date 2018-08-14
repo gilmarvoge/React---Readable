@@ -13,11 +13,25 @@ import {
 
 const posts = (state = [], action) => {
   switch (action.type) {
-    case GET_ALL_POSTS_SUCCESS:
-    case ADICIONA_POST_SUCCESS:
-    case DELETE_POST_SUCCESS: {
-      return action.posts
+    case GET_ALL_POSTS_SUCCESS: {
+      
+      const { posts } = action;
+      const pos1t = JSON.stringify(posts)
+      console.log(`action ${pos1t}`)
+      return [ ...posts ];
     }
+  
+
+ 
+    case ADICIONA_POST_SUCCESS: {
+      const pos1t = JSON.stringify(posts)
+      console.log(`action ${state.posts}`)
+      const { post } = action.post;
+
+       return state.concat(action.post)
+    }
+   
+
     case UPVOTE_POST_SUCCESS:
     case DOWNVOTE_POST_SUCCESS: {
       const newState = state.map(post => {
@@ -37,4 +51,3 @@ const posts = (state = [], action) => {
 }
 
 export default posts
-

@@ -66,8 +66,8 @@ export const voteUpDownPost = (id, option) =>
     body: JSON.stringify({ option })
   }).then(res => res.json())
   
-export const deletePost = (post) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
     headers: headers
   }).then(res => res.json())

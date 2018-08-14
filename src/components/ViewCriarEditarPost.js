@@ -38,6 +38,7 @@ class ViewCriarEditarPost extends Component {
     }
 
     onSubmitEditPost = e => {
+        e.preventDefault()
         if (this.state.edit) {
             const { category, title, author, body } = this.state;
             this.props.editPostById({

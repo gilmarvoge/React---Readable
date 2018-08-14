@@ -52,7 +52,6 @@ import {
 
 
 
-
 function* getAllCategories() {
   const categories = yield call(readableAPI.getAllCategories)
   yield put({
@@ -70,16 +69,18 @@ function* getAllPosts() {
 }
 
 function* adicionaPost(action) {
+  
   const post = yield call(readableAPI.adicionaPost, action.post);
   yield put({
     type: ADICIONA_POST_SUCCESS,
     post,
   });
+  const pos1t = JSON.stringify(post)
+  console.log(`adicionar post no saga ${pos1t}`)
 }
 
 function* getPostById({ id }) { //entre chaves pega a ID e não o objeto
-  console.log("idddd"+id)
-    const post = yield call(readableAPI.getPostById, id);
+   const post = yield call(readableAPI.getPostById, id);
   yield put({
     type: GET_POST_BY_ID_SUCCESS,
     post,
@@ -104,13 +105,13 @@ function* updatePost(action) {
   });
 }
 
-function* deletePost(action) {
-  const post = yield call(readableAPI.deletePost, action.post)
-  yield put({
-    type: DELETE_POST_SUCCESS,
-    post,
-  });
+function* deletePost({id}) {
+  console.log(`id excluir ${id}`)
+  yield call(readableAPI.deletePost, id)
+  yield call(getAllPosts)
+  console.log(`chamou getall`)
 }
+
 
 function* voteUpPost({ id, option} ) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
