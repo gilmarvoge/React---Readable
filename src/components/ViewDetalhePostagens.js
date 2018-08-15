@@ -6,7 +6,8 @@ import { getPostById } from '../actions/PostsActions'
 import { getCommentsById } from '../actions/CommentsActions'
 import { adicionaComment } from '../actions/CommentsActions'
 import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
-import Post from '../components/Post'
+import PostDetails from '../components/PostDetails'
+import { Redirect } from 'react-router-dom';
 
 class ViewDetalhePostagens extends Component {
     constructor(props) {
@@ -26,40 +27,23 @@ class ViewDetalhePostagens extends Component {
         this.props.getCommentsById(this.props.match.params.postId);
 
     }
-
     addCommentHandler = comment => {
         comment.parentId = this.props.match.params.postId;
         this.props.adicionaComment(comment);
     };
 
-    /**  
-     
-      e.preventDefault();
-      if (this.state.edit) {
-         const { author, body } = this.state;
-         this.props.editCommentById({
-             id: this.props.comment.id,
-             author,
-             body,
-        });
-     } else {
-         const { author, body } = this.state;
-         this.props.adicionaComment({
-             parentId: this.props.post_id,      
-             author,
-             body,
-          });
-      } */
-
-
     render() {
-        this.props.children
-
         const post = this.props.post
         const comments = this.props.comments
-        return (
-            <div>
-                <Post post={post} />
+
+        if (post.err) {
+            return <Redirect to="/404/PostNotFound" />;
+          }
+
+       return (
+            
+            <div> 
+                <PostDetails post={post} />
                 <button onClick={this.toggleModal} type="botao-novo-comment" className="comment-botao-novo-comment" >
                     Novo Comentário
                 </button>
@@ -75,8 +59,8 @@ class ViewDetalhePostagens extends Component {
             </div>
 
 
-        )
-    }
+        )}
+    
 }
 
 

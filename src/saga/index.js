@@ -8,6 +8,7 @@ export default function* SagaRedux() {
 
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import * as readableAPI from '../utils/readableAPI'
+import _ from 'lodash';
 
 import {
   GET_ALL_POSTS,
@@ -23,7 +24,8 @@ import {
   EDIT_POST_BY_ID,
   EDIT_POST_BY_ID_SUCCESS,
   DELETE_POST,
-  DELETE_POST_SUCCESS
+  DELETE_POST_SUCCESS,
+  POST_NAO_ENCONTRADO
 
 } from '../constantes/Post';
 
@@ -69,7 +71,7 @@ function* getAllPosts() {
 }
 
 function* adicionaPost(action) {
-  
+
   const post = yield call(readableAPI.adicionaPost, action.post);
   yield put({
     type: ADICIONA_POST_SUCCESS,
@@ -80,11 +82,27 @@ function* adicionaPost(action) {
 }
 
 function* getPostById({ id }) { //entre chaves pega a ID e não o objeto
-   const post = yield call(readableAPI.getPostById, id);
-  yield put({
-    type: GET_POST_BY_ID_SUCCESS,
-    post,
-  });
+  try {
+    const post = yield call(readableAPI.getPostById, id);
+    if (_.isEmpty(post)) {
+      post.err = 'deleted';
+      yield put({
+        type: POST_NAO_ENCONTRADO,
+        post,
+      });
+    } if (post)
+      yield put({
+        type: GET_POST_BY_ID_SUCCESS,
+        post,
+      });
+  } catch (e) {
+    const post = {};
+    post.err = e;
+    yield put({
+      type: POST_NAO_ENCONTRADO,
+      post,
+    });
+  }
 }
 
 function* getPostsByCategory(action) {
@@ -105,15 +123,19 @@ function* updatePost(action) {
   });
 }
 
-function* deletePost({id}) {
+function* deletePost({ id }) {
   console.log(`id excluir ${id}`)
-  yield call(readableAPI.deletePost, id)
-  yield call(getAllPosts)
-  console.log(`chamou getall`)
+  const post =  yield call(readableAPI.deletePost, id)
+  yield put({
+    type: DELETE_POST_SUCCESS,
+    post,
+  });
 }
 
 
-function* voteUpPost({ id, option} ) {
+
+
+function* voteUpPost({ id, option }) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({
     type: UPVOTE_POST_SUCCESS,
@@ -125,7 +147,7 @@ function* voteUpPost({ id, option} ) {
   });
 }
 
-function* downVotePost ({id, option }) {
+function* downVotePost({ id, option }) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({
     type: DOWNVOTE_POST_SUCCESS,
@@ -143,7 +165,7 @@ function* getCommentsById(postId) {
 
 function* adicionaComment(action) {
   const comment = yield call(readableAPI.addComment, action.comment);
-  const comments = yield call(readableAPI.getAllCommentsByPost, {id:comment.parentId});
+  const comments = yield call(readableAPI.getAllCommentsByPost, { id: comment.parentId });
   yield put({
     type: GET_POST_BY_ID,
     id: comment.parentId,
@@ -155,7 +177,7 @@ function* adicionaComment(action) {
 }
 
 function* updateComment(action) {
-   const comment = yield call(readableAPI.updateComment, action.comment)
+  const comment = yield call(readableAPI.updateComment, action.comment)
   yield put({
     type: EDIT_COMMENT_BY_ID_SUCCESS,
     comment,
@@ -163,10 +185,15 @@ function* updateComment(action) {
 }
 
 function* deleteComment(action) {
-  const comment = yield call(readableAPI.deleteComment, action.comment)
+  const comment = yield call(readableAPI.deleteComment, action.id)
+  const comments = yield call(readableAPI.getAllCommentsByPost, { id: comment.parentId });
   yield put({
-    type: DELETE_COMMENT_SUCCESS,
-    comment,
+    type: GET_POST_BY_ID,
+    id: comment.parentId,
+  });
+  yield put({
+    type: GET_COMMENTS_BY_ID_SUCCESS,
+    comments,
   });
 }
 
@@ -191,8 +218,8 @@ function* downVoteComment({ id, option }) {
 export default function* rootSaga() {
   yield takeEvery(GET_ALL_POSTS, getAllPosts)
   yield takeEvery(ADICIONA_POST, adicionaPost),
-  yield takeEvery(UPVOTE_POST, voteUpPost),
-  yield takeEvery(DOWNVOTE_POST, downVotePost),
+    yield takeEvery(UPVOTE_POST, voteUpPost),
+    yield takeEvery(DOWNVOTE_POST, downVotePost),
     yield takeEvery(EDIT_POST_BY_ID, updatePost),
     yield takeEvery(DELETE_POST, deletePost),
     yield takeEvery(GET_POST_BY_ID, getPostById),
@@ -202,10 +229,10 @@ export default function* rootSaga() {
     yield takeEvery(ADICIONA_COMMENT, adicionaComment),
     yield takeEvery(UPVOTE_COMMENT, upVoteComment),
     yield takeEvery(DOWNVOTE_COMMENT, downVoteComment)
-    yield takeEvery(EDIT_COMMENT_BY_ID, updateComment),
+  yield takeEvery(EDIT_COMMENT_BY_ID, updateComment),
     yield takeEvery(DELETE_COMMENT, deleteComment)
-    
- }
+
+}
 
 
  // yield takeEvery(GET_ALL_POSTS_SUCCESS, fetchAllPosts)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { upVoteComment, downVoteComment } from '../actions/CommentsActions';
+import { upVoteComment, downVoteComment, deleteComment } from '../actions/CommentsActions';
 import { connect } from 'react-redux';
 import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
 
@@ -24,6 +24,11 @@ class Comments extends Component {
         this.props.downVoteComment(id);
     };
 
+    deleteComment = (id) => {
+        this.props.deleteComment(id);
+    };
+    
+
     render() {
         const comment = this.props.comment
 
@@ -41,11 +46,11 @@ class Comments extends Component {
                         <button className="botao-vote-down" onClick={() => this.downVoteComment(comment.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVoteComment(comment.id)}><i className="fa fa-thumbs-o-up"></i></button>
                         <button className="post-button-editar" onClick={this.editComment}>Editar<i className="fa fa-edit"></i></button>
-                        <button className='post-button-remover'> Remove</button>
+                        <button className='post-button-remover'onClick={() => this.deleteComment(comment.id)}> Remove</button>
                     </li>
                 </ol>
             </div>
         )
     }
 }
-export default connect(null, { upVoteComment, downVoteComment })(Comments);
+export default connect(null, { upVoteComment, downVoteComment, deleteComment })(Comments);

@@ -79,4 +79,3 @@ const mapStateToProps = ({ posts }) => ({
 });
 
 export default connect(mapStateToProps, { getAllPosts, getPostsByCategory })(ViewPosts)
-

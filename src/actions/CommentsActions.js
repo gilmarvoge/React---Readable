@@ -33,9 +33,9 @@ export const getAllComments = () => ({
       comment,
     });
 
-    export const deleteComment = comment => ({
+    export const deleteComment = id => ({
       type: DELETE_COMMENT,
-      comment,
+      id,
     });
 
     export const upVoteComment = id => ({

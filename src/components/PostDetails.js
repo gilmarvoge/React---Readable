@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {  upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
+import { Redirect } from 'react-router-dom';
 
 const  editOrNew =''
 
-class Post extends Component {
-
+class PostDetails extends Component {
+    state = {
+        redirect: false,
+      };
     upVotePost (id) {
         this.props.upVotePost(id);
       };
@@ -13,17 +16,17 @@ class Post extends Component {
        this.props.downVotePost(id);
       };
       deletePost = (id) => {
-        this.props.deletePost(id);
-     
-
+        this.props.deletePost(id)
+      
+        this.setState({ redirect: true });
+          
        };
-  
-     
-
-render(){
+  render(){
 
     const post=this.props.post;
-   
+    if (this.state.redirect) {
+        return <Redirect to="/" />;
+      }
  
     return (
        <div>
@@ -51,4 +54,4 @@ render(){
     )
 }
 }
-export default connect(null, { upVotePost, downVotePost, deletePost })( Post);
+export default connect(null, { upVotePost, downVotePost, deletePost })(PostDetails);

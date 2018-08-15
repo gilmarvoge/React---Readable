@@ -16,8 +16,7 @@ const comments = (state = [], action) => {
 
     case UPVOTE_COMMENT_SUCCESS:
     case DOWNVOTE_COMMENT_SUCCESS:
-    case EDIT_COMMENT_BY_ID_SUCCESS:
-    case DELETE_COMMENT_SUCCESS:{
+    case EDIT_COMMENT_BY_ID_SUCCESS: {
       const newState = state.map(comment => {
         if (comment.id === action.comment.id) {
           return action.comment;
