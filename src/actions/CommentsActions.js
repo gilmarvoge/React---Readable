@@ -31,7 +31,7 @@ export const getAllComments = () => ({
     export const editComment = comment => ({
       type: EDIT_COMMENT_BY_ID,
       comment,
-    });
+     });
 
     export const deleteComment = id => ({
       type: DELETE_COMMENT,

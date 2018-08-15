@@ -15,11 +15,9 @@ class Comments extends Component {
         console.log(this.state.editComment)
     };
 
-    handleEditComment = comment => {
+    handleEditComment = (comment) => {
         this.props.editComment({
-            id: this.props.comment.id,
-            comment,
-
+           comment
         });
         this.setState({ editMode: false });
     };
@@ -41,6 +39,7 @@ class Comments extends Component {
 
         const renderComment = this.state.editComment ? (
             <ViewEditarComment editComentValues={comment} editComment={this.handleEditComment} />
+               
         ) : (
                 <div className='commentario-detalhe'>
                     <p><strong>{`Author: ${comment.author}`}</strong></p>

@@ -5,12 +5,6 @@ import posts from './postsReducer'
 import post from './postReducer'
 import categories from './categoriesReducer'
 import comments from './commentsReducer'
-//import comment from './commentReducer'
-
-
-
-
-
 
 const rootReducer = combineReducers({
   categories,  

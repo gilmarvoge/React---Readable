@@ -17,17 +17,16 @@ class ViewEditarComment extends Component {
   };
 
   editComment = e => {
-    e.preventDefault();
     const comment = {
+      id: this.props.editComentValues.id,
       body: this.state.body,
-      author:this.state.author,
+      author: this.state.author,
     };
-    console.log("coment editado"+comment)
     this.props.editComment(comment);
   };
 
   render() {
-    
+
 
     return (
       <form onSubmit={this.editComment}>

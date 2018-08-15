@@ -10,10 +10,8 @@ import {
   DOWNVOTE_COMMENT_SUCCESS
 } from '../constantes/Comment'
 
-
 const comments = (state = [], action) => {
   switch (action.type) {
-
     case UPVOTE_COMMENT_SUCCESS:
     case DOWNVOTE_COMMENT_SUCCESS:
     case EDIT_COMMENT_BY_ID_SUCCESS: {
@@ -25,7 +23,6 @@ const comments = (state = [], action) => {
       });
       return [...newState];
     }
-
     case GET_COMMENTS_BY_ID_SUCCESS:
       {
         return action.comments;

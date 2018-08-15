@@ -174,11 +174,12 @@ function* adicionaComment(action) {
 }
 
 function* updateComment(action) {
-  const comment = yield call(readableAPI.updateComment, action.comment)
-  yield put({
+  const comment = yield call(readableAPI.updateComment,  action.comment)
+    yield put({
     type: EDIT_COMMENT_BY_ID_SUCCESS,
     comment,
   });
+ 
 }
 
 function* deleteComment(action) {
@@ -193,7 +194,6 @@ function* deleteComment(action) {
     comments,
   });
 }
-
 
 function* upVoteComment({ id, option }) {
   const comment = yield call(readableAPI.voteUpDownComment, id, option);
