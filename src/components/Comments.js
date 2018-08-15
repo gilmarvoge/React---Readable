@@ -2,20 +2,27 @@ import React, { Component } from 'react';
 import { upVoteComment, downVoteComment, deleteComment } from '../actions/CommentsActions';
 import { connect } from 'react-redux';
 import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
-
+import ViewEditarComment from './ViewEditarComment'
 
 class Comments extends Component {
     constructor(props) {
         super(props);
-
         this.state = { editComment: false, };
     }
 
     editComment = () => {
         this.setState({ editComment: true });
         console.log(this.state.editComment)
-      };
+    };
 
+    handleEditComment = comment => {
+        this.props.editComment({
+            id: this.props.comment.id,
+            comment,
+           
+        });
+        this.setState({ editMode: false });
+    };
 
     upVoteComment(id) {
         this.props.upVoteComment(id);
@@ -27,26 +34,30 @@ class Comments extends Component {
     deleteComment = (id) => {
         this.props.deleteComment(id);
     };
-    
+
 
     render() {
         const comment = this.props.comment
 
+        const renderComment = this.state.editComment ? (
+            <ViewEditarComment editComentValues={comment} editComment={this.handleEditComment} />
+        ) : (
+                <div className='commentario-detalhe'>
+                    <p><strong>{`Author: ${comment.author}`}</strong></p>
+                    <p>{comment.body}</p>
+                    <p>Votos: {comment.voteScore}</p>
+                </div>
 
-
+            )
         return (
             <div>
                 <ol className='commentario-lista'>
                     <li key={comment.id} className='commentario-lista-item'>
-                        <div className='commentario-detalhe'>
-                            <p><strong>{`Author: ${comment.author}`}</strong></p>
-                            <p>{comment.body}</p>
-                            <p>Votos: {comment.voteScore}</p>
-                        </div>
+                        {renderComment}
                         <button className="botao-vote-down" onClick={() => this.downVoteComment(comment.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVoteComment(comment.id)}><i className="fa fa-thumbs-o-up"></i></button>
                         <button className="post-button-editar" onClick={this.editComment}>Editar<i className="fa fa-edit"></i></button>
-                        <button className='post-button-remover'onClick={() => this.deleteComment(comment.id)}> Remove</button>
+                        <button className='post-button-remover' onClick={() => this.deleteComment(comment.id)}> Remove</button>
                     </li>
                 </ol>
             </div>

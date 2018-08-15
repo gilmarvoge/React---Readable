@@ -36,7 +36,7 @@ const posts = (state = [], action) => {
 
     case DELETE_POST_SUCCESS: {
       const newState = state.filter(post => {
-        return post.id !== action.post.id // return all the items not matching the action.post.id
+        return post.id !== action.post.id // return all the posts not matching the action.post.id
        })
       return [...newState ]
     }

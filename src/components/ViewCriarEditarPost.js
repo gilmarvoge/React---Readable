@@ -99,7 +99,6 @@ class ViewCriarEditarPost extends Component {
                         <label className='form-label'>Autor</label>
                     </div>
                     <input className="form-input" type="text" id="author" placeholder="Digite o Autor" value={author} onChange={this.handleChange('author')} required></input>
-
                     <div>
                         <button className="form-botao-submit" type="submit">Submit</button>
                     </div>
