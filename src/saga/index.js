@@ -132,9 +132,6 @@ function* deletePost({ id }) {
   });
 }
 
-
-
-
 function* voteUpPost({ id, option }) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
   yield put({

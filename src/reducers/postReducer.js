@@ -13,7 +13,6 @@ const post = (state = [], action) => {
     case GET_POST_BY_ID_SUCCESS: 
     case UPVOTE_POST_SUCCESS:
     case DOWNVOTE_POST_SUCCESS:
-    case DELETE_POST_SUCCESS:
      {
       return { ...action.post };
     }
