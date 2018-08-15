@@ -14,7 +14,7 @@ const backdropStyle = {
 const modalStyle = {
     backgroundColor: '#fff',
     borderRadius: 5,
-    maxWidth: 600,
+    maxWidth: 700,
     minHeight: 200,
     margin: '0 auto',
     padding: 30

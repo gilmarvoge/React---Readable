@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { upVoteComment, downVoteComment, deleteComment } from '../actions/CommentsActions';
+import { upVoteComment, downVoteComment, deleteComment, editComment } from '../actions/CommentsActions';
 import { connect } from 'react-redux';
-import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
+import ViewModalCriarEditarComment from './ViewCriarComment'
 import ViewEditarComment from './ViewEditarComment'
 
 class Comments extends Component {
@@ -19,7 +19,7 @@ class Comments extends Component {
         this.props.editComment({
             id: this.props.comment.id,
             comment,
-           
+
         });
         this.setState({ editMode: false });
     };
@@ -47,7 +47,6 @@ class Comments extends Component {
                     <p>{comment.body}</p>
                     <p>Votos: {comment.voteScore}</p>
                 </div>
-
             )
         return (
             <div>
@@ -56,7 +55,7 @@ class Comments extends Component {
                         {renderComment}
                         <button className="botao-vote-down" onClick={() => this.downVoteComment(comment.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVoteComment(comment.id)}><i className="fa fa-thumbs-o-up"></i></button>
-                        <button className="post-button-editar" onClick={this.editComment}>Editar<i className="fa fa-edit"></i></button>
+                        <button className="post-button-editar" onClick={this.editComment}>Editar<i ></i></button>
                         <button className='post-button-remover' onClick={() => this.deleteComment(comment.id)}> Remove</button>
                     </li>
                 </ol>
@@ -64,4 +63,4 @@ class Comments extends Component {
         )
     }
 }
-export default connect(null, { upVoteComment, downVoteComment, deleteComment })(Comments);
+export default connect(null, { upVoteComment, downVoteComment, deleteComment, editComment })(Comments);

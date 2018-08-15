@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getPostById } from '../actions/PostsActions'
 import { getCommentsById } from '../actions/CommentsActions'
 import { adicionaComment } from '../actions/CommentsActions'
-import ViewModalCriarEditarComment from './ViewModalCriarEditarComment'
+import ViewModalCriarEditarComment from './ViewCriarComment'
 import PostDetails from '../components/PostDetails'
 import { Redirect } from 'react-router-dom';
 

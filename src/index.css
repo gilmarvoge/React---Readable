@@ -172,6 +172,18 @@ li {
   font-size:12px;
 }
 
+.comment-button-editar{
+  background-color:#45a049;
+  color:white;
+  border: none;
+  margin-top:5px;
+  margin-left:20px;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 24px;
+  font-size:12px;
+}
+
 .post-button-editar:hover{
   background-color: #239628;
 }
@@ -262,7 +274,7 @@ li {
 
 .form-input-modal {
   font: 1em sans-serif;
-  width: 633px;
+  width: 630px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border: 1px solid #999;
