@@ -5,7 +5,7 @@ Readable é um aplicativo de posts e comentários como Hacker News e Reddit. Os 
 
 ### Instalando
 
-`` `
+```
 clone git https://github.com/gilmarvoge/readable.git
 cd readable
 
@@ -18,7 +18,7 @@ frontend cd
 npm install
 npm start
 
-`` `
+```
 
 ### Funcionalidade (requisitos)
 
