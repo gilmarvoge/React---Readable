@@ -10,13 +10,14 @@ clone git https://github.com/gilmarvoge/readable.git
 cd readable
 
 #para api-server
-npm install
-npm start
+-cd readable/api-server
+-npm install
+-npm start
 
-#para frontend
-frontend cd
-npm install
-npm start
+#para aplicação
+-cd readable
+-npm install
+-npm start
 
 ```
 
