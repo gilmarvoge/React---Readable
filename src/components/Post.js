@@ -1,35 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
-
-const  editOrNew =''
+import { upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
 
 class Post extends Component {
 
-    upVotePost (id) {
+    upVotePost(id) {
         this.props.upVotePost(id);
-      };
+    };
     downVotePost = (id) => {
-       this.props.downVotePost(id);
-      };
-      deletePost = (id) => {
+        this.props.downVotePost(id);
+    };
+    deletePost = (id) => {
         this.props.deletePost(id);
-     
+    };
 
-       };
-  
-     
-
-render(){
-
-    const post=this.props.post;
-   
- 
-    return (
-       <div>
-           
-            <ol className='post-list'>
-                  <li className='post-list-item'>
+    render() {
+        const post = this.props.post;
+        return (
+            <div>
+                <ol className='post-list'>
+                    <li className='post-list-item'>
                         <div className='post-details'>
                             <a href={`/${post.category}/${post.id}`} >
                                 <p><strong>{post.title}</strong></p></a>
@@ -39,16 +29,15 @@ render(){
                             <p>{post.commentCount} Comentarios</p>
                             <p>Votos: {post.voteScore}</p>
                         </div>
-                        <button className="botao-vote-down"  onClick={() => this.downVotePost(post.id)}><i className="fa fa-thumbs-o-down"></i></button>
+                        <button className="botao-vote-down" onClick={() => this.downVotePost(post.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVotePost(post.id)}><i className="fa fa-thumbs-o-up"></i></button>
                         <a className="tamanho-a-botao" href={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></a>
-                        <button className='post-button-remover'onClick={() => this.deletePost(post.id)}> Remove</button>
+                        <button className='post-button-remover' onClick={() => this.deletePost(post.id)}> Remove</button>
                     </li>
-              
-            </ol>
-           
-        </div>
-    )
+                </ol>
+            </div>
+        )
+    }
 }
-}
-export default connect(null, { upVotePost, downVotePost, deletePost })( Post);
+
+export default connect(null, { upVotePost, downVotePost, deletePost })(Post);

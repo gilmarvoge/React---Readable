@@ -28,9 +28,8 @@ class ViewCriarEditarPost extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { category, title, body, author } = nextProps.post;
+        const { title, body, author } = nextProps.post;
         this.setState({
-            // category,
             title,
             body,
             author,
@@ -56,7 +55,6 @@ class ViewCriarEditarPost extends Component {
                 author,
                 title,
                 body,
-                author,
             });
             this.props.history.push("/");
         }
@@ -76,15 +74,14 @@ class ViewCriarEditarPost extends Component {
 
 
     render() {
-        const { category, title, body, author } = this.state;
-        console.log(`nova categoria ${category}`)
+        const { title, body, author } = this.state;
         return (
             <div className="form-new-post">
                 <div required>
-                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('react')} required>React</button>
-                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('redux')}>Redux</button>
-                <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('udacity')}>Udacity</button>
-               </div>   
+                    <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('react')} required>React</button>
+                    <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('redux')}>Redux</button>
+                    <button className='post-botao-selecionar-categoria' name='category' onClick={this.handleChangeCategory('udacity')}>Udacity</button>
+                </div>
                 <form onSubmit={this.onSubmitEditPost} >
                     <div>
                         <label className='form-label'>Título</label>

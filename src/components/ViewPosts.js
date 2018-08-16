@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Post from './Post';
 import { getAllPosts } from '../actions/PostsActions'
 import { getPostsByCategory } from '../actions/CategoriesActions'
-
 import { connect } from 'react-redux'
 import { PostsSorted } from '../utils/helpers';
 
@@ -39,7 +38,6 @@ class ViewPosts extends Component {
     render() {
         const posts = this.props.posts
         const checkbox = this.state.checkbox
-        console.log(`checkbox: ${this.state.checkbox}`)
         return (
             <div className='list-post-top'>
                 <div className="alinhar-botao-radio">

@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import {
   GET_ALL_POSTS_SUCCESS,
   ADICIONA_POST_SUCCESS,
@@ -8,8 +6,6 @@ import {
   UPVOTE_POST_SUCCESS,
   DOWNVOTE_POST_SUCCESS
 } from '../constantes/Post'
-
-
 
 const posts = (state = [], action) => {
   switch (action.type) {
@@ -33,12 +29,11 @@ const posts = (state = [], action) => {
     case EDIT_POST_BY_ID_SUCCESS: {
       return { ...state };
     }
-
     case DELETE_POST_SUCCESS: {
       const newState = state.filter(post => {
         return post.id !== action.post.id // return all the posts not matching the action.post.id
-       })
-      return [...newState ]
+      })
+      return [...newState]
     }
     default:
       return state;

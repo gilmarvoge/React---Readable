@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers'
 import rootSaga from '../saga/index'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import {setPosts} from '../actions/PostsActions'
 
-
+/*
 const logger = store => next => action => {
   console.group(action.type)
   console.info('dispatching', action)
@@ -14,6 +13,7 @@ const logger = store => next => action => {
   console.groupEnd(action.type)
  return result
 } 
+*/
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,13 +21,11 @@ const store = createStore(
   reducer,
   composeWithDevTools(
     applyMiddleware(
-      sagaMiddleware,logger
+      sagaMiddleware//,logger
     )
   )
 )
 //store.dispatch(setPosts())
-
-
 
 sagaMiddleware.run(rootSaga)
 

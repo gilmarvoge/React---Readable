@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { upVoteComment, downVoteComment, deleteComment, editComment } from '../actions/CommentsActions';
 import { connect } from 'react-redux';
-import ViewModalCriarEditarComment from './ViewCriarComment'
 import ViewEditarComment from './ViewEditarComment'
 
 class Comments extends Component {
@@ -17,7 +16,7 @@ class Comments extends Component {
 
     handleEditComment = (comment) => {
         this.props.editComment({
-           comment
+            comment
         });
         this.setState({ editMode: false });
     };
@@ -25,6 +24,7 @@ class Comments extends Component {
     upVoteComment(id) {
         this.props.upVoteComment(id);
     };
+
     downVoteComment = (id) => {
         this.props.downVoteComment(id);
     };
@@ -33,13 +33,10 @@ class Comments extends Component {
         this.props.deleteComment(id);
     };
 
-
     render() {
         const comment = this.props.comment
-
         const renderComment = this.state.editComment ? (
             <ViewEditarComment editComentValues={comment} editComment={this.handleEditComment} />
-               
         ) : (
                 <div className='commentario-detalhe'>
                     <p><strong>{`Author: ${comment.author}`}</strong></p>
@@ -62,4 +59,5 @@ class Comments extends Component {
         )
     }
 }
+
 export default connect(null, { upVoteComment, downVoteComment, deleteComment, editComment })(Comments);

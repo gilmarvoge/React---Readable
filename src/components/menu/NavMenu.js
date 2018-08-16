@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { Glyphicon, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { getAllCategories } from '../../actions/CategoriesActions'
 import './NavMenu.css';
 
 export class NavMenu extends Component {
@@ -39,7 +38,6 @@ export class NavMenu extends Component {
                 <Glyphicon glyph='globe' /> Udacity
               </NavItem>
             </LinkContainer>
-           
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -3,25 +3,25 @@ import { connect } from 'react-redux';
 import { upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
 import { Redirect } from 'react-router-dom';
 
-const editOrNew = ''
-
 class PostDetails extends Component {
     state = {
         redirect: false,
     };
+
     upVotePost(id) {
         this.props.upVotePost(id);
     };
+
     downVotePost = (id) => {
         this.props.downVotePost(id);
     };
+
     deletePost = (id) => {
         this.props.deletePost(id)
         this.setState({ redirect: true });
     };
 
     render() {
-
         const post = this.props.post;
         if (this.state.redirect) {
             return <Redirect to="/" />;
