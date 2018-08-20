@@ -6,19 +6,17 @@ import ViewEditarComment from './ViewEditarComment'
 class Comments extends Component {
     constructor(props) {
         super(props);
-        this.state = { editComment: false, };
+        this.state = { edit: false, };
     }
 
     editComment = () => {
-        this.setState({ editComment: true });
-        console.log(this.state.editComment)
+        this.setState({ edit: true });
     };
 
     handleEditComment = (comment) => {
         this.props.editComment({
             comment
         });
-        this.setState({ editMode: false });
     };
 
     upVoteComment(id) {
@@ -35,7 +33,7 @@ class Comments extends Component {
 
     render() {
         const comment = this.props.comment
-        const renderComment = this.state.editComment ? (
+        const renderComment = this.state.edit ? (
             <ViewEditarComment editComentValues={comment} editComment={this.handleEditComment} />
         ) : (
                 <div className='commentario-detalhe'>

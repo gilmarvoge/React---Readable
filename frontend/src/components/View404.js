@@ -4,11 +4,9 @@ import notFound from '../notFound.png'
 class View404NotFound extends Component {
     render() {
         return (
-            <div>
-              
+            <div>   
             <img  src={notFound}    ></img>
             </div>
-
         )
     }
 }

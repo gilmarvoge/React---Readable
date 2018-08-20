@@ -33,12 +33,9 @@ class ViewDetalhePostagens extends Component {
     render() {
 
         const post = this.props.post
-        
-        const teste = JSON.stringify(post)
-        console.log("post "+ teste)
         const comments = this.props.comments
 
-        if (post.err) {
+        if (post.err || post.error) {
             return <Redirect to="/404/PostNotFound" />;
         }
 
@@ -60,20 +57,12 @@ class ViewDetalhePostagens extends Component {
     }
 }
 
-
 const mapStateToProps = ({ posts, comments }) => {
-    //const {post}
-    return{
-    post:posts,
-    comments,
+    return {
+        post: posts,
+        comments,
     }
 };
 
-
-
-
-
-
-export default connect(mapStateToProps,{getPostById, getCommentsById, adicionaComment})(ViewDetalhePostagens);
-//: posts.find(post => post === postId),
+export default connect(mapStateToProps, { getPostById, getCommentsById, adicionaComment })(ViewDetalhePostagens);
 

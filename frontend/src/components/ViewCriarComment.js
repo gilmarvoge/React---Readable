@@ -56,15 +56,14 @@ class ViewModalCriarEditarComment extends Component {
     }
 
     render() {
-          
+
         const { body, author } = this.state;
         if (!this.props.show) {
             return null;
         }
-        
+
         return (
             <form onSubmit={this.onSubmitNewComment}>
-                
                 <div style={backdropStyle}>
                     <div style={modalStyle}>
                         <div >
