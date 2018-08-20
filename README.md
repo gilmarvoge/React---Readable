@@ -47,4 +47,4 @@ Usar o redux e o redux-saga é mais fácil de gerenciar estados e coisas assínc
 
 
 
-![](Detalhes.jpg)
+![](detalhes.JPG)
