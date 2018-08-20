@@ -10,13 +10,14 @@ clone git https://github.com/gilmarvoge/readable.git
 cd readable
 
 #para api-server
-npm install
-npm start
+-cd readable/api-server
+-npm install
+-npm start
 
-#para frontend
-frontend cd
-npm install
-npm start
+#para aplicação
+-cd readable
+-npm install
+-npm start
 
 ```
 
@@ -36,7 +37,7 @@ npm start
     - deve ter um controle para adicionar um novo comentário.
     - Implementar o formulário de comentários que você quiser (inline, modal, etc.)
     - os comentários também devem ter controles para editar ou excluir
-- Criar / Editar vista
+- Criar / Editar Posts
     - deve ter um formulário para criar uma nova postagem ou editar postagens existentes
     - ao editar, os dados existentes devem ser preenchidos no formulário
 
