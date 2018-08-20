@@ -17,7 +17,7 @@ class ViewEditarComment extends Component {
   };
 
   editComment = e => {
-    const comment = {
+      const comment = {
       id: this.props.editComentValues.id,
       body: this.state.body,
       author: this.state.author,

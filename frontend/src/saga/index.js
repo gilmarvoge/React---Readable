@@ -119,11 +119,7 @@ function* voteUpPost({ id, option }) {
     type: UPVOTE_POST_SUCCESS,
     post,
   });
-  yield put({
-    type: GET_POST_BY_ID_SUCCESS,
-    post,
-  });
-}
+ }
 
 function* downVotePost({ id, option }) {
   const post = yield call(readableAPI.voteUpDownPost, id, option);
@@ -131,7 +127,7 @@ function* downVotePost({ id, option }) {
     type: DOWNVOTE_POST_SUCCESS,
     post,
   });
-}
+  }
 
 function* getCommentsById(postId) {
   const comments = yield call(readableAPI.getAllCommentsByPost, postId)

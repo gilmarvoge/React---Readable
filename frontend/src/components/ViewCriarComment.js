@@ -41,7 +41,8 @@ class ViewModalCriarEditarComment extends Component {
         });
     };
 
-    onSubmitNewEditComment = e => {
+    onSubmitNewComment = e => {
+        e.preventDefault()
         const comment = {
             body: this.state.body,
             author: this.state.author,
@@ -51,22 +52,18 @@ class ViewModalCriarEditarComment extends Component {
             body: '',
             author: '',
         });
-
+        this.props.onClose()
     }
 
-
     render() {
-        const data1 = JSON.stringify(this.props.show)
-        console.log('children '+data1)
-       
+          
         const { body, author } = this.state;
         if (!this.props.show) {
             return null;
         }
         
-        //this.state.open = this.props.open;
         return (
-            <form onSubmit={this.onSubmitNewEditComment}>
+            <form onSubmit={this.onSubmitNewComment}>
                 
                 <div style={backdropStyle}>
                     <div style={modalStyle}>

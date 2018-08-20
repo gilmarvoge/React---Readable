@@ -75,6 +75,7 @@ class ViewCriarEditarPost extends Component {
 
     render() {
         const { title, body, author } = this.state;
+        const post = this.props.post
         return (
             <div className="form-new-post">
                 <div required>
@@ -105,9 +106,13 @@ class ViewCriarEditarPost extends Component {
     }
 }
 
-const mapStateToProps = ({ post }) => ({
-    post,
-});
 
+const mapStateToProps = ({ posts }) => {
+    
+    return{
+    post:posts,
+   
+    }
+};
 
 export default connect(mapStateToProps, { getPostById, editPostById, adicionaPost })(ViewCriarEditarPost);

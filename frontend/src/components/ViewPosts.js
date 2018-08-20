@@ -4,6 +4,7 @@ import { getAllPosts } from '../actions/PostsActions'
 import { getPostsByCategory } from '../actions/CategoriesActions'
 import { connect } from 'react-redux'
 import { PostsSorted } from '../utils/helpers';
+import { Link } from 'react-router-dom'
 
 
 class ViewPosts extends Component {
@@ -41,7 +42,7 @@ class ViewPosts extends Component {
         return (
             <div className='list-post-top'>
                 <div className="alinhar-botao-radio">
-                    <a href="/novo"><button className='post-botao-novo-post' type='botao-novo-post'>Novo Post</button></a>
+                    <Link to="/novo"><button className='post-botao-novo-post' type='botao-novo-post'>Novo Post</button></Link>
                     <div className='radio-button'>
                         <label className="container-radio-button">Ordenar por:</label>
                         <label className="container-radio-button">Data

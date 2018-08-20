@@ -22,8 +22,8 @@ export default class App extends Component {
               <h1 className='header'>Readable</h1>
               <Route exact path='/' component={ViewPosts} />
               <Route exact path="/:category" component={ViewPosts} />
-              <Route exact path="/novo" component={ViewCriarEditarPost} />
               <Route exact path='/:category/:postId/editar' component={ViewCriarEditarPost} />
+              <Route exact path="/novo" component={ViewCriarEditarPost} />
               <Route exact path="/:category/:postId" component={ViewDetalhePostagens} />
               <Route exact path="/404/PostNotFound" component={View404} />
             </div>

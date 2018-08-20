@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { upVotePost, downVotePost, deletePost } from '../actions/PostsActions';
+import { Link } from 'react-router-dom'
 
 class Post extends Component {
 
@@ -21,8 +22,8 @@ class Post extends Component {
                 <ol className='post-list'>
                     <li className='post-list-item'>
                         <div className='post-details'>
-                            <a href={`/${post.category}/${post.id}`} >
-                                <p><strong>{post.title}</strong></p></a>
+                            <Link to={`/${post.category}/${post.id}`} >
+                                <p><strong>{post.title}</strong></p></Link>
                             <p>{`Criado por ${post.author} em ${new Date(post.timestamp).toLocaleString('pt-BR', { hour12: false })}`}</p>
                             <p>{post.category}</p>
                             <p>{post.body}</p>
@@ -31,7 +32,7 @@ class Post extends Component {
                         </div>
                         <button className="botao-vote-down" onClick={() => this.downVotePost(post.id)}><i className="fa fa-thumbs-o-down"></i></button>
                         <button className="botao-vote-up" onClick={() => this.upVotePost(post.id)}><i className="fa fa-thumbs-o-up"></i></button>
-                        <a className="tamanho-a-botao" href={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></a>
+                        <Link className="tamanho-a-botao" to={`/${post.category}/${post.id}/editar`}><button className="post-button-editar">Editar<i className="fa fa-edit"></i></button></Link>
                         <button className='post-button-remover' onClick={() => this.deletePost(post.id)}> Remove</button>
                     </li>
                 </ol>
@@ -39,5 +40,7 @@ class Post extends Component {
         )
     }
 }
+
+
 
 export default connect(null, { upVotePost, downVotePost, deletePost })(Post);

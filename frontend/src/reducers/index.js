@@ -9,7 +9,6 @@ const rootReducer = combineReducers({
   categories,
   posts,
   comments,
-  post,
-})
+  })
 
 export default rootReducer
