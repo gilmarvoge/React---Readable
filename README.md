@@ -44,3 +44,7 @@ cd readable
 ### Funcionalidade Adicional
 #### Usando Redux e Redux-Saga
 Usar o redux e o redux-saga é mais fácil de gerenciar estados e coisas assíncronas, mais eficiente de executar, simples de testar e melhor em lidar com falhas.
+
+
+
+![](detalhes.JPG)
